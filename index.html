@@ -983,18 +983,18 @@
   <p class="section-label">Contact</p>
   <h2 class="section-title">Ready to automate<br>your hotel?</h2>
   <p>Book a free 30-minute demo call. We'll show you exactly how ZORA works and set up your first month for free.</p>
-  <form class="contact-form" action="https://formspree.io/f/mvzvkadz" method="POST">
-    <div class="form-row">
-      <input type="text" placeholder="Your name" required />
-      <input type="text" placeholder="Hotel name" required />
-    </div>
-    <div class="form-row">
-      <input type="email" placeholder="Email address" required />
-      <input type="tel" placeholder="Phone number" />
-    </div>
-    <textarea placeholder="Tell us about your hotel..."></textarea>
-    <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
-  </form>
+<form class="contact-form" action="https://formspree.io/f/mvzvkadz" method="POST">
+  <div class="form-row">
+    <input type="text" name="name" placeholder="Your name" required />
+    <input type="text" name="hotel" placeholder="Hotel name" required />
+  </div>
+  <div class="form-row">
+    <input type="email" name="email" placeholder="Email address" required />
+    <input type="tel" name="phone" placeholder="Phone number" />
+  </div>
+  <textarea name="message" placeholder="Tell us about your hotel..."></textarea>
+  <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+</form>
 </section>
 
 <!-- FOOTER -->
