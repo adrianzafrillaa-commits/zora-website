@@ -143,7 +143,8 @@
     .contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
     .contact-form input::placeholder, .contact-form textarea::placeholder { color: #555; }
     .contact-form textarea { height: 120px; resize: none; }
-    .privacy-check { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--gray); line-height: 1.6; }
+    .privacy-check { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--gray); line-height: 1.6; max-width: 100%; }
+.privacy-check span { flex: 1; text-align: left; }
     .privacy-check input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; accent-color: var(--gold); }
     .privacy-check a { color: var(--gold); text-decoration: none; }
     footer { padding: 2rem 4rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; background: var(--dark); flex-wrap: wrap; gap: 1rem; }
@@ -207,13 +208,13 @@
 <div class="stats">
   <div class="stat"><span class="stat-number">24/7</span><span class="stat-label" data-i18n="stats.s1">Guest Support</span></div>
   <div class="stat"><span class="stat-number">15+</span><span class="stat-label" data-i18n="stats.s2">Languages</span></div>
-  <div class="stat"><span class="stat-number">3h</span><span class="stat-label" data-i18n="stats.s3">Saved Daily</span></div>
+  <div class="stat"><span class="stat-number">+4h</span><span class="stat-label" data-i18n="stats.s3">Saved Daily</span></div>
   <div class="stat"><span class="stat-number">100%</span><span class="stat-label" data-i18n="stats.s4">Swiss Data Privacy</span></div>
 </div>
 
 <section class="section" id="problem">
   <p class="section-label" data-i18n="problem.label">The Problem</p>
-  <h2 class="section-title" data-i18n="problem.title">Your front desk is losing time<br>on tasks AI can handle</h2>
+  <h2 class="section-title" data-i18n="problem.title">Your front desk is losing time<br>on tasks we can automate</h2>
   <p class="section-desc" data-i18n="problem.desc">Hotels in Switzerland receive hundreds of repetitive guest inquiries every week — in multiple languages, at all hours. Your team spends hours on tasks that should be automated.</p>
   <div class="problems-grid">
     <div class="problem-card">
