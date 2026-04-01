@@ -184,9 +184,10 @@
   </ul>
   <div class="nav-right">
     <div class="lang-switcher">
-      <button class="lang-btn" onclick="setLang('en', this)">EN</button> <button class="lang-btn active" onclick="setLang('de', this)">DE</button>
-      <button class="lang-btn" onclick="setLang('de', this)">DE</button>
+      <button class="lang-btn" onclick="setLang('en', this)">EN</button>
+      <button class="lang-btn active" onclick="setLang('de', this)">DE</button>
       <button class="lang-btn" onclick="setLang('fr', this)">FR</button>
+      <button class="lang-btn" onclick="setLang('it', this)">IT</button>
     </div>
     <a href="#contact" class="nav-cta" data-i18n="nav.cta">Get Started</a>
   </div>
@@ -355,10 +356,10 @@
       <input type="tel" name="phone" placeholder="Phone number" data-i18n-placeholder="form.phone" />
     </div>
     <textarea name="message" placeholder="Tell us about your hotel..." data-i18n-placeholder="form.message"></textarea>
-<label class="privacy-check">
+<div class="privacy-check">
   <input type="checkbox" name="privacy" required />
   <span data-i18n="form.privacy">I agree to the <a href="/privacy.html">Privacy Policy</a>. My data will be used solely to respond to my inquiry and will not be shared with third parties.</span>
-</label>
+</div>
     <button type="submit" class="btn-primary" style="width:100%;" data-i18n="form.submit">Send Message</button>
   </form>
 </section>
