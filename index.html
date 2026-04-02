@@ -355,10 +355,16 @@
       <input type="tel" name="phone" placeholder="Phone number" data-i18n-placeholder="form.phone" />
     </div>
     <textarea name="message" placeholder="Tell us about your hotel..." data-i18n-placeholder="form.message"></textarea>
-<div style="display:flex; align-items:flex-start; gap:10px; font-size:12px; color:#888; line-height:1.6; width:100%; text-align:left; box-sizing:border-box; padding:0 4rem;">
-  <input type="checkbox" name="privacy" required style="margin-top:3px; flex-shrink:0; accent-color:#c9a96e;" />
-  <span style="display:block; width:100%;">I agree to the <a href="/privacy.html" style="color:#c9a96e;">Privacy Policy</a>. My data will be used solely to respond to my inquiry and will not be shared with third parties.</span>
-</div>
+<table style="width:100%; border:none; border-spacing:0;">
+  <tr>
+    <td style="width:20px; vertical-align:top; padding-top:2px;">
+      <input type="checkbox" name="privacy" required style="accent-color:#c9a96e;" />
+    </td>
+    <td style="font-size:12px; color:#888; line-height:1.6; text-align:left; padding-left:8px;">
+      I agree to the <a href="/privacy.html" style="color:#c9a96e;">Privacy Policy</a>. My data will be used solely to respond to my inquiry and will not be shared with third parties.
+    </td>
+  </tr>
+</table>
     <button type="submit" class="btn-primary" style="width:100%;" data-i18n="form.submit">Send Message</button>
   </form>
 </div>
