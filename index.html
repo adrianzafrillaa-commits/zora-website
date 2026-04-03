@@ -564,6 +564,7 @@ window.onload = function() {
   document.getElementById("user-input").addEventListener("keydown", function(e) {
     if (e.key === "Enter") sendMessage();
   });
+  setLang('de', document.querySelector('[onclick="setLang(\'de\', this)"]'));
   addMessage("Welcome to Hotel Altstadt Luzern. I am your virtual concierge, available 24 hours a day.\n\nHow may I assist you today?", "bot");
 };
 
