@@ -348,8 +348,10 @@ function showView(name) {
 }
 
 function loadData() {
-  var url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(SHEET_BASE_URL + '&t=' + Date.now());
-  fetch(url)
+  var t = Date.now();
+  var csvUrl = SHEET_BASE_URL + '&t=' + t;
+  var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(csvUrl) + '&t=' + t;
+  fetch(proxyUrl, { cache: 'no-store' })
     .then(function(r) { return r.text(); })
     .then(function(text) { allRows = parseCSV(text); renderAll(); })
     .catch(function() { loadDemoData(); });
@@ -455,6 +457,30 @@ function renderStats() {
   document.getElementById('room-stats').innerHTML =
     '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>Deluxe Room</span><span>'+deluxe+' ('+Math.round(deluxe/total*100)+'%)</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+Math.round(deluxe/total*100)+'%"></div></div></div>'+
     '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>Junior Suite</span><span>'+junior+' ('+Math.round(junior/total*100)+'%)</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+Math.round(junior/total*100)+'%;background:var(--blue)"></div></div></div>';
+
+  // Nationality detection from guest name
+  var natMap = {};
+  allRows.forEach(function(r) {
+    var name = (r['Guest Name'] || '').toLowerCase();
+    var nat = '🌍 Other';
+    if (/müller|zimmermann|hans|schmidt|fischer/.test(name)) nat = '🇩🇪 Germany';
+    else if (/dubois|lefevre|pierre|claire|martin/.test(name)) nat = '🇫🇷 France';
+    else if (/rossi|ferretti|marco|elena|olivia/.test(name)) nat = '🇮🇹 Italy';
+    else if (/nakamura|yuki|tanaka|mei|zhang/.test(name)) nat = '🇯🇵 Japan';
+    else if (/larsson|ingrid|eriksson/.test(name)) nat = '🇸🇪 Sweden';
+    else if (/oliveira|rafael|silva/.test(name)) nat = '🇵🇹 Portugal';
+    else if (/al-hassan|fatima|ahmed/.test(name)) nat = '🇦🇪 UAE';
+    else if (/chen|wang|li|liu/.test(name)) nat = '🇨🇳 China';
+    else if (/mendoza|carlos|garcia/.test(name)) nat = '🇪🇸 Spain';
+    else if (/kowalski|anna|nowak/.test(name)) nat = '🇵🇱 Poland';
+    else if (/o\'brien|james|wilson/.test(name)) nat = '🇬🇧 UK';
+    natMap[nat] = (natMap[nat] || 0) + 1;
+  });
+  var topNats = Object.entries(natMap).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+  var maxNat = topNats.length ? topNats[0][1] : 1;
+  document.getElementById('nationality-stats').innerHTML = topNats.map(function(entry) {
+    return '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>'+entry[0]+'</span><span>'+entry[1]+' guests</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+Math.round(entry[1]/maxNat*100)+'%"></div></div></div>';
+  }).join('');
 
   var upsellSent = allRows.filter(function(r){return r['Upsell Sent']==='YES';}).length;
   var upsellPct = allRows.length ? Math.round(upsellSent/allRows.length*100) : 0;
