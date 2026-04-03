@@ -291,13 +291,22 @@ var USERS = {
   'director@zorai.ch':  { pass: '123456789', role: 'director',  hotel: 'Hotel Zora Luzern' }
 };
 
-var SHEET_BASE_URL = 'https://script.google.com/macros/s/AKfycbwKC1_9uGvZn9Df2EIl8sojNcRGkWjFEiJnH8j3-4WIXDdYx-ZdmepoFQs8nCGJIGnB/exec';
+var SHEET_BASE_URL = 'https://script.google.com/macros/s/AKfycby2FkgFTeKrMzak1gxIyAaZSDeYJapxJjn0mdfYpYb-1Q-eFB3YeF_C4xPIuvGO4bmL/exec';
 
 var currentRole = '';
 var allRows = [];
 
 function today() { return new Date().toISOString().split('T')[0]; }
-function formatDate(d) { if (!d) return '—'; var p = d.split('-'); return p.length === 3 ? p[2]+'.'+p[1]+'.'+p[0] : d; }
+function normalizeDate(d) {
+  if (!d) return '';
+  return String(d).substring(0, 10);
+}
+  if (!d) return '—';
+  // Handle ISO format: 2026-04-04T22:00:00.000Z
+  var str = String(d).substring(0, 10);
+  var p = str.split('-');
+  return p.length === 3 ? p[2]+'.'+p[1]+'.'+p[0] : str;
+}
 
 function setTopbarDate() {
   var now = new Date();
@@ -382,8 +391,8 @@ function loadDemoData() {
 
 function renderAll() {
   var t = today();
-  var arrivals   = allRows.filter(function(r) { return r['Check-in Date'] === t; });
-  var departures = allRows.filter(function(r) { return r['Check-out Date'] === t; });
+  var arrivals   = allRows.filter(function(r) { return normalizeDate(r['Check-in Date']) === t; });
+  var departures = allRows.filter(function(r) { return normalizeDate(r['Check-out Date']) === t; });
   var pending    = allRows.filter(function(r) { return r['Special Request'] && r['Special Request Status'] === 'pending'; });
   var withReq    = allRows.filter(function(r) { return r['Special Request']; });
 
@@ -396,26 +405,26 @@ function renderAll() {
   document.getElementById('table-arrivals').innerHTML = arrivals.length === 0
     ? '<tr><td colspan="5" class="empty-state">No arrivals today</td></tr>'
     : arrivals.map(function(r) {
-        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong><br><span style="font-size:11px;color:var(--gray)">'+r['Guest Email']+'</span></td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td>'+formatDate(r['Check-out Date'])+'</td><td style="font-size:12px;color:'+(r['Special Request']?'var(--gold)':'var(--gray)')+'">'+( r['Special Request'] || '—')+'</td><td><span class="badge badge-checkin">Arriving</span></td></tr>';
+        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong><br><span style="font-size:11px;color:var(--gray)">'+r['Guest Email']+'</span></td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td>'+formatDate(normalizeDate(r['Check-out Date']))+'</td><td style="font-size:12px;color:'+(r['Special Request']?'var(--gold)':'var(--gray)')+'">'+( r['Special Request'] || '—')+'</td><td><span class="badge badge-checkin">Arriving</span></td></tr>';
       }).join('');
 
   document.getElementById('count-departures').textContent = departures.length + ' guest' + (departures.length !== 1 ? 's' : '');
   document.getElementById('table-departures').innerHTML = departures.length === 0
     ? '<tr><td colspan="4" class="empty-state">No departures today</td></tr>'
     : departures.map(function(r) {
-        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong><br><span style="font-size:11px;color:var(--gray)">'+r['Guest Email']+'</span></td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td>'+formatDate(r['Check-in Date'])+'</td><td><span class="badge '+(r['Upsell Sent']==='YES'?'badge-done':'badge-pending')+'">'+(r['Upsell Sent']==='YES'?'Sent ✓':'Pending')+'</span></td></tr>';
+        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong><br><span style="font-size:11px;color:var(--gray)">'+r['Guest Email']+'</span></td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td>'+formatDate(normalizeDate(r['Check-in Date']))+'</td><td><span class="badge '+(r['Upsell Sent']==='YES'?'badge-done':'badge-pending')+'">'+(r['Upsell Sent']==='YES'?'Sent ✓':'Pending')+'</span></td></tr>';
       }).join('');
 
   document.getElementById('count-all-guests').textContent = allRows.length + ' guests';
   document.getElementById('table-all-guests').innerHTML = allRows.map(function(r) {
-    return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong></td><td style="font-size:12px;color:var(--gray)">'+r['Guest Email']+'</td><td>'+formatDate(r['Check-in Date'])+'</td><td>'+formatDate(r['Check-out Date'])+'</td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td style="font-size:12px;color:'+(r['Special Request']?'var(--gold)':'var(--gray)')+'">'+( r['Special Request'] || '—')+'</td></tr>';
+    return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong></td><td style="font-size:12px;color:var(--gray)">'+r['Guest Email']+'</td><td>'+formatDate(normalizeDate(r['Check-in Date']))+'</td><td>'+formatDate(normalizeDate(r['Check-out Date']))+'</td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td style="font-size:12px;color:'+(r['Special Request']?'var(--gold)':'var(--gray)')+'">'+( r['Special Request'] || '—')+'</td></tr>';
   }).join('');
 
   document.getElementById('count-all-requests').textContent = withReq.length + ' total · ' + pending.length + ' pending';
   document.getElementById('table-all-requests').innerHTML = withReq.length === 0
     ? '<tr><td colspan="4" class="empty-state">No special requests</td></tr>'
     : withReq.map(function(r) {
-        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong></td><td style="font-size:12px;color:var(--gold)">'+r['Special Request']+'</td><td>'+formatDate(r['Check-in Date'])+'</td><td><span class="badge '+(r['Special Request Status']==='done'?'badge-done':'badge-pending')+'">'+(r['Special Request Status']||'pending')+'</span></td></tr>';
+        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong></td><td style="font-size:12px;color:var(--gold)">'+r['Special Request']+'</td><td>'+formatDate(normalizeDate(r['Check-in Date']))+'</td><td><span class="badge '+(r['Special Request Status']==='done'?'badge-done':'badge-pending')+'">'+(r['Special Request Status']||'pending')+'</span></td></tr>';
       }).join('');
 
   if (currentRole === 'director') renderStats();
@@ -423,8 +432,8 @@ function renderAll() {
 
 function renderStats() {
   var thisMonth = today().slice(0,7);
-  var monthly = allRows.filter(function(r) { return r['Check-in Date'] && r['Check-in Date'].startsWith(thisMonth); });
-  var specialM = allRows.filter(function(r) { return r['Special Request'] && r['Check-in Date'] && r['Check-in Date'].startsWith(thisMonth); });
+  var monthly = allRows.filter(function(r) { return r['Check-in Date'] && normalizeDate(r['Check-in Date']).startsWith(thisMonth); });
+  var specialM = allRows.filter(function(r) { return r['Special Request'] && r['Check-in Date'] && normalizeDate(r['Check-in Date']).startsWith(thisMonth); });
   var hoursSaved = Math.round(allRows.length * 2 * 0.1 * 10) / 10;
   var revenue = (monthly.length || allRows.length) * 3 * 400;
 
@@ -438,7 +447,7 @@ function renderStats() {
     var d = new Date(); d.setMonth(d.getMonth() - i);
     var key = d.toISOString().slice(0,7);
     var label = d.toLocaleDateString('en', {month:'short'});
-    var count = allRows.filter(function(r) { return r['Check-in Date'] && r['Check-in Date'].startsWith(key); }).length;
+    var count = allRows.filter(function(r) { return r['Check-in Date'] && normalizeDate(r['Check-in Date']).startsWith(key); }).length;
     months.push({label:label, count:count, current:i===0});
   }
   var maxCount = Math.max.apply(null, months.map(function(m){return m.count;}));
