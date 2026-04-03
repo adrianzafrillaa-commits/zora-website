@@ -648,6 +648,7 @@
     </div>
     <p class="login-error" id="login-error">Invalid credentials. Please try again.</p>
     <button class="login-btn" onclick="doLogin()">Access Dashboard</button>
+    <p style="text-align:center;margin-top:1rem;"><a href="mailto:info@zorai.ch?subject=Password Reset Request" style="font-size:11px;color:var(--gray);text-decoration:none;letter-spacing:1px;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--gray)'">Forgot password? Contact support →</a></p>
     <p class="login-footer">🇨🇭 Powered by ZORA · zorai.ch</p>
   </div>
 </div>
@@ -868,15 +869,16 @@
 
 <script>
   // ── CREDENTIALS (add hotels here) ──
-const USERS = {
-  'zorahotel.demo@gmail.ch': { pass: '123456789', role: 'reception', hotel: 'Hotel Zora Luzern' },
-  'director@hotelzora.ch':  { pass: '123456789', role: 'director', hotel: 'Hotel Zora Luzern' },
-};
+  const USERS = {
+    'reception@zorahotel.demo': { pass: 'zora2026', role: 'reception', hotel: 'Hotel Zora Luzern' },
+    'director@zorahotel.demo':  { pass: 'director2026', role: 'director', hotel: 'Hotel Zora Luzern' },
+  };
 
   // ── Google Sheets config ──
   // Replace with your actual published CSV URL:
   // In Google Sheets: File → Share → Publish to web → CSV → Copy link
-  const SHEET_CSV_URL = 'https://api.allorigins.win/raw?url=https://docs.google.com/spreadsheets/d/e/2PACX-1vT02byayhawG48R2Y9fVXaN6HkqBnzT3YymXGmLIBrrrW3Q_TbqWSBYZPPT3yGmlubB8ds_4eaIeUfG/pub?gid=0&single=true&output=csv';
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT02byayhawG48R2Y9fVXaN6HkqBnzT3YymXGmLIBrrrW3Q_TbqWSBYZPPT3yGmlubB8ds_4eaIeUfG/pub?gid=0&single=true&output=csv';
+
   let currentRole = '';
   let allRows = [];
 
