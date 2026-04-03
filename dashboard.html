@@ -301,9 +301,9 @@ function normalizeDate(d) {
   if (!d) return '';
   return String(d).substring(0, 10);
 }
+function formatDate(d) {
   if (!d) return '—';
-  // Handle ISO format: 2026-04-04T22:00:00.000Z
-  var str = String(d).substring(0, 10);
+  var str = normalizeDate(String(d));
   var p = str.split('-');
   return p.length === 3 ? p[2]+'.'+p[1]+'.'+p[0] : str;
 }
