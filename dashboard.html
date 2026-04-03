@@ -9,12 +9,12 @@
 :root {
   --gold: #c9a96e;
   --gold-light: #e8c98a;
-  --gold-dim: rgba(201,169,110,0.15);
-  --dark: #181818;
-  --dark2: #232323;
-  --dark3: #2e2e2e;
+  --gold-dim: rgba(201,169,110,0.2);
+  --dark: #1e1e2e;
+  --dark2: #2a2a3e;
+  --dark3: #353550;
   --white: #ffffff;
-  --gray: #999999;
+  --gray: #a0a0b8;
   --green: #4caf7d;
   --red: #e05c5c;
   --blue: #5c8ee0;
@@ -291,8 +291,7 @@ var USERS = {
   'director@zorai.ch':  { pass: '123456789', role: 'director',  hotel: 'Hotel Zora Luzern' }
 };
 
-var SHEET_BASE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT02byayhawG48R2Y9fVXaN6HkqBnzT3YymXGmLIBrrrW3Q_TbqWSBYZPPT3yGmlubB8ds_4eaIeUfG/pub?gid=0&single=true&output=csv';
-var SHEET_CSV_URL = SHEET_BASE_URL;
+var SHEET_BASE_URL = 'https://script.google.com/macros/s/AKfycby2FkgFTeKrMzak1gxIyAaZSDeYJapxJjn0mdfYpYb-1Q-eFB3YeF_C4xPIuvGO4bmL/exec';
 
 var currentRole = '';
 var allRows = [];
@@ -348,12 +347,9 @@ function showView(name) {
 }
 
 function loadData() {
-  var t = Date.now();
-  var csvUrl = SHEET_BASE_URL + '&t=' + t;
-  var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(csvUrl) + '&t=' + t;
-  fetch(proxyUrl, { cache: 'no-store' })
-    .then(function(r) { return r.text(); })
-    .then(function(text) { allRows = parseCSV(text); renderAll(); })
+  fetch(SHEET_BASE_URL)
+    .then(function(r) { return r.json(); })
+    .then(function(data) { allRows = data; renderAll(); })
     .catch(function() { loadDemoData(); });
 }
 
