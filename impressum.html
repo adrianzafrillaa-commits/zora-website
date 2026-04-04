@@ -1,80 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impressum — ZORA</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0a0a0a;
-      color: #ffffff;
-    }
-    nav {
-      padding: 1.25rem 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(201,169,110,0.15);
-    }
-    .nav-logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      color: #c9a96e;
-      text-decoration: none;
-    }
-    .content {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-    }
-    .label {
-      font-size: 11px;
-      color: #c9a96e;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    h1 {
-      font-size: 42px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 3rem;
-    }
-    h2 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 0.75rem;
-      margin-top: 2rem;
-    }
-    p {
-      font-size: 15px;
-      color: #aaa;
-      line-height: 1.8;
-      margin-bottom: 0.5rem;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #ffffff; }
+    nav { padding: 1.25rem 4rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(201,169,110,0.15); }
+    .nav-logo { font-size: 22px; font-weight: 700; letter-spacing: 4px; color: #c9a96e; text-decoration: none; }
+    .lang-switch { display: flex; gap: 8px; }
+    .lang-switch a { font-size: 12px; color: #888; text-decoration: none; padding: 4px 10px; border: 1px solid rgba(201,169,110,0.2); border-radius: 4px; transition: all 0.2s; }
+    .lang-switch a:hover, .lang-switch a.active { color: #c9a96e; border-color: #c9a96e; }
+    .content { max-width: 700px; margin: 0 auto; padding: 5rem 2rem; }
+    .label { font-size: 11px; color: #c9a96e; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem; }
+    h1 { font-size: 42px; font-weight: 700; color: #fff; margin-bottom: 3rem; }
+    h2 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 0.75rem; margin-top: 2rem; }
+    p { font-size: 15px; color: #aaa; line-height: 1.8; margin-bottom: 0.5rem; }
     a { color: #c9a96e; text-decoration: none; }
-    .divider {
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      margin: 2rem 0;
-    }
-    footer {
-      padding: 2rem 4rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .footer-logo {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      color: #c9a96e;
-    }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 2rem 0; }
+    .section { display: none; }
+    .section.active { display: block; }
+    footer { padding: 2rem 4rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-size: 18px; font-weight: 700; letter-spacing: 4px; color: #c9a96e; }
     .footer-text { font-size: 12px; color: #888; }
     .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: 12px; color: #888; text-decoration: none; }
@@ -85,48 +33,111 @@
 
 <nav>
   <a href="/" class="nav-logo">ZORA</a>
+  <div class="lang-switch">
+    <a href="#" onclick="setLang('de',this)" class="active">DE</a>
+    <a href="#" onclick="setLang('en',this)">EN</a>
+  </div>
 </nav>
 
 <div class="content">
-  <p class="label">Legal</p>
-  <h1>Impressum</h1>
 
-  <h2>Company Information</h2>
-  <p>ZORA</p>
-  <p>Adrian Zafrilla Ortiz</p>
-  <p>Amlehnstrasse 50</p>
-  <p>6010 Kriens, Switzerland</p>
+  <!-- GERMAN -->
+  <div class="section active" id="lang-de">
+    <p class="label">Rechtliches</p>
+    <h1>Impressum</h1>
 
-  <hr class="divider">
+    <h2>Angaben zum Unternehmen</h2>
+    <p>ZORA</p>
+    <p>Adrian Zafrilla Ortiz</p>
+    <p>Amlehnstrasse 50</p>
+    <p>6010 Kriens, Schweiz</p>
 
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:info@zorai.ch">info@zorai.ch</a></p>
-  <p>Website: <a href="https://zorai.ch">zorai.ch</a></p>
+    <hr class="divider">
 
-  <hr class="divider">
+    <h2>Kontakt</h2>
+    <p>E-Mail: <a href="mailto:info@zorai.ch">info@zorai.ch</a></p>
+    <p>Telefon: <a href="tel:+41783153254">+41 78 315 32 54</a></p>
+    <p>Website: <a href="https://zorai.ch">zorai.ch</a></p>
 
-  <h2>Disclaimer</h2>
-  <p>ZORA provides AI-powered concierge solutions for hotels. All content on this website is for informational purposes only. We reserve the right to modify or discontinue any service at any time.</p>
+    <hr class="divider">
 
-  <hr class="divider">
+    <h2>Haftungsausschluss</h2>
+    <p>ZORA bietet KI-gestützte Concierge-Lösungen für Hotels an. Alle Inhalte dieser Website dienen ausschliesslich Informationszwecken. Wir behalten uns das Recht vor, Dienste jederzeit zu ändern oder einzustellen.</p>
 
-  <h2>AI Technology</h2>
-  <p>This website uses AI technology powered by Anthropic Claude. The AI concierge demo processes conversations in real time. Conversations are not stored permanently by ZORA.</p>
+    <hr class="divider">
 
-  <hr class="divider">
+    <h2>KI-Technologie</h2>
+    <p>Diese Website verwendet KI-Technologie von Anthropic Claude. Der KI-Concierge-Demo verarbeitet Konversationen in Echtzeit. Gespräche werden von ZORA nicht dauerhaft gespeichert.</p>
 
-  <h2>Applicable Law</h2>
-  <p>This website is subject to Swiss law. The place of jurisdiction is Luzern, Switzerland.</p>
+    <hr class="divider">
+
+    <h2>Anwendbares Recht</h2>
+    <p>Diese Website unterliegt dem Schweizer Recht. Gerichtsstand ist Luzern, Schweiz.</p>
+
+    <hr class="divider">
+
+    <h2>Datenschutz</h2>
+    <p>Informationen zur Verarbeitung personenbezogener Daten finden Sie in unserer <a href="/privacy.html">Datenschutzerklärung</a>.</p>
+  </div>
+
+  <!-- ENGLISH -->
+  <div class="section" id="lang-en">
+    <p class="label">Legal</p>
+    <h1>Impressum</h1>
+
+    <h2>Company Information</h2>
+    <p>ZORA</p>
+    <p>Adrian Zafrilla Ortiz</p>
+    <p>Amlehnstrasse 50</p>
+    <p>6010 Kriens, Switzerland</p>
+
+    <hr class="divider">
+
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:info@zorai.ch">info@zorai.ch</a></p>
+    <p>Phone: <a href="tel:+41783153254">+41 78 315 32 54</a></p>
+    <p>Website: <a href="https://zorai.ch">zorai.ch</a></p>
+
+    <hr class="divider">
+
+    <h2>Disclaimer</h2>
+    <p>ZORA provides AI-powered concierge solutions for hotels. All content on this website is for informational purposes only. We reserve the right to modify or discontinue any service at any time.</p>
+
+    <hr class="divider">
+
+    <h2>AI Technology</h2>
+    <p>This website uses AI technology powered by Anthropic Claude. The AI concierge demo processes conversations in real time. Conversations are not stored permanently by ZORA.</p>
+
+    <hr class="divider">
+
+    <h2>Applicable Law</h2>
+    <p>This website is subject to Swiss law. The place of jurisdiction is Luzern, Switzerland.</p>
+
+    <hr class="divider">
+
+    <h2>Privacy</h2>
+    <p>For information on the processing of personal data, please refer to our <a href="/privacy.html">Privacy Policy</a>.</p>
+  </div>
+
 </div>
 
 <footer>
   <div class="footer-logo">ZORA</div>
-  <p class="footer-text">© 2026 ZORA · AI Concierge for Hotels</p>
+  <p class="footer-text">© 2026 ZORA · Intelligent Concierge for Hotels</p>
   <div class="footer-links">
     <a href="/impressum.html">Impressum</a>
     <a href="/privacy.html">Privacy Policy</a>
   </div>
 </footer>
+
+<script>
+function setLang(lang, btn) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById('lang-' + lang).classList.add('active');
+  document.querySelectorAll('.lang-switch a').forEach(function(a) { a.classList.remove('active'); });
+  btn.classList.add('active');
+}
+</script>
 
 </body>
 </html>
