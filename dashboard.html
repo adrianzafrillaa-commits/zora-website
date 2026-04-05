@@ -5,140 +5,182 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZORA Dashboard</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --gold: #c9a96e;
-  --gold-light: #e8c98a;
-  --gold-dim: rgba(201,169,110,0.2);
-  --dark: #1e1e2e;
-  --dark2: #2a2a3e;
-  --dark3: #353550;
-  --white: #ffffff;
-  --gray: #a0a0b8;
-  --green: #4caf7d;
-  --red: #e05c5c;
-  --blue: #5c8ee0;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#c9a96e;--gold-light:#e8c98a;--gold-dim:rgba(201,169,110,0.15);
+  --dark:#0d0d14;--dark2:#13131f;--dark3:#1a1a2e;--dark4:#222235;
+  --white:#f0f0f8;--gray:#6b6b88;--gray2:#9090a8;
+  --green:#3dbe7a;--red:#e05c5c;--blue:#5c8ee0;--purple:#8b5cf6;
+  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
 }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark); color: var(--white); min-height: 100vh; }
+body{font-family:var(--font);background:var(--dark);color:var(--white);min-height:100vh;overflow-x:hidden;}
 
 /* LOGIN */
-#login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--dark); }
-.login-box { background: var(--dark2); border: 1px solid var(--gold-dim); padding: 3rem; width: 100%; max-width: 420px; }
-.login-logo { text-align: center; margin-bottom: 2.5rem; }
-.login-logo-text { font-size: 28px; font-weight: 700; letter-spacing: 8px; color: var(--gold); text-transform: uppercase; display: block; }
-.login-logo-sub { font-size: 10px; color: var(--gray); letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; display: block; }
-.login-title { font-size: 13px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; text-align: center; margin-bottom: 2rem; }
-.login-field { margin-bottom: 1.2rem; }
-.login-field label { display: block; font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-.login-field input { width: 100%; padding: 12px 16px; background: var(--dark3); border: 1px solid rgba(255,255,255,0.08); color: var(--white); font-size: 14px; outline: none; }
-.login-field input:focus { border-color: var(--gold); }
-.login-error { font-size: 12px; color: var(--red); margin-bottom: 1rem; display: none; text-align: center; }
-.login-btn { width: 100%; padding: 14px; background: var(--gold); color: #000; border: none; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 0.5rem; }
-.login-btn:hover { background: var(--gold-light); }
-.login-footer { text-align: center; margin-top: 1.5rem; font-size: 11px; color: var(--gray); letter-spacing: 1px; }
-.login-forgot { text-align: center; margin-top: 1rem; }
-.login-forgot a { font-size: 11px; color: var(--gray); text-decoration: none; letter-spacing: 1px; }
-.login-forgot a:hover { color: var(--gold); }
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+#login-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(201,169,110,0.06) 0%,transparent 60%),radial-gradient(ellipse at 70% 20%,rgba(92,142,224,0.04) 0%,transparent 50%);}
+.login-box{position:relative;background:var(--dark2);border:1px solid var(--gold-dim);padding:3rem;width:100%;max-width:400px;backdrop-filter:blur(10px);}
+.login-logo{text-align:center;margin-bottom:2.5rem;}
+.login-logo-text{font-size:30px;font-weight:600;letter-spacing:10px;color:var(--gold);display:block;}
+.login-logo-sub{font-size:9px;color:var(--gray2);letter-spacing:4px;text-transform:uppercase;margin-top:6px;display:block;}
+.login-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(61,190,122,0.1);border:1px solid rgba(61,190,122,0.2);padding:4px 12px;border-radius:20px;margin-bottom:2rem;}
+.login-badge span{width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block;}
+.login-badge p{font-size:10px;color:var(--green);letter-spacing:1px;}
+.login-field{margin-bottom:1.2rem;}
+.login-field label{display:block;font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.login-field input{width:100%;padding:12px 16px;background:var(--dark3);border:1px solid rgba(255,255,255,0.06);color:var(--white);font-size:14px;font-family:var(--font);outline:none;transition:border-color 0.2s;border-radius:4px;}
+.login-field input:focus{border-color:var(--gold);}
+.login-error{font-size:12px;color:var(--red);margin-bottom:1rem;display:none;text-align:center;}
+.login-btn{width:100%;padding:13px;background:var(--gold);color:#000;border:none;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:0.5rem;border-radius:4px;font-family:var(--font);transition:background 0.2s;}
+.login-btn:hover{background:var(--gold-light);}
+.login-footer{text-align:center;margin-top:1.5rem;font-size:10px;color:var(--gray);letter-spacing:1px;}
 
-/* DASHBOARD */
-#dashboard-screen { display: none; }
-.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 240px; background: var(--dark2); border-right: 1px solid var(--gold-dim); display: flex; flex-direction: column; z-index: 50; }
-.sidebar-logo { padding: 2rem 1.5rem; border-bottom: 1px solid var(--gold-dim); }
-.sidebar-logo-text { font-size: 20px; font-weight: 700; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
-.sidebar-logo-sub { font-size: 9px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; display: block; }
-.sidebar-hotel { padding: 1.2rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(201,169,110,0.04); }
-.sidebar-hotel-name { font-size: 12px; color: var(--white); font-weight: 600; }
-.sidebar-hotel-role { font-size: 10px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }
-.sidebar-nav { flex: 1; padding: 1.5rem 0; }
-.nav-section-label { font-size: 9px; color: var(--gray); letter-spacing: 2.5px; text-transform: uppercase; padding: 0 1.5rem; margin-bottom: 0.5rem; margin-top: 1rem; }
-.nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 1.5rem; font-size: 13px; color: var(--gray); cursor: pointer; transition: all 0.2s; border-left: 2px solid transparent; }
-.nav-item:hover { color: var(--white); background: rgba(255,255,255,0.03); }
-.nav-item.active { color: var(--gold); border-left-color: var(--gold); background: rgba(201,169,110,0.06); }
-.nav-icon { font-size: 15px; width: 18px; text-align: center; }
-.sidebar-bottom { padding: 1.5rem; border-top: 1px solid var(--gold-dim); }
-.logout-btn { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--gray); cursor: pointer; }
-.logout-btn:hover { color: var(--red); }
-.main { margin-left: 240px; min-height: 100vh; }
-.topbar { padding: 1.5rem 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; background: var(--dark2); position: sticky; top: 0; z-index: 40; }
-.topbar-title { font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: 1px; }
-.topbar-right { display: flex; align-items: center; gap: 1.5rem; }
-.topbar-date { font-size: 12px; color: var(--gray); letter-spacing: 1px; }
-.live-badge { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--green); letter-spacing: 1.5px; text-transform: uppercase; }
-.live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.refresh-btn { padding: 7px 16px; background: transparent; border: 1px solid var(--gold-dim); color: var(--gold); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; }
-.refresh-btn:hover { background: var(--gold-dim); }
-.view { display: none; padding: 2.5rem; }
-.view.active { display: block; }
-.director-only { display: none; }
-.role-director .director-only { display: block; }
+/* LAYOUT */
+#dashboard-screen{display:none;min-height:100vh;}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:220px;background:var(--dark2);border-right:1px solid var(--gold-dim);display:flex;flex-direction:column;z-index:50;}
+.sidebar-logo{padding:1.5rem;border-bottom:1px solid var(--gold-dim);}
+.sidebar-logo-text{font-size:18px;font-weight:600;letter-spacing:6px;color:var(--gold);}
+.sidebar-logo-sub{font-size:9px;color:var(--gray);letter-spacing:2px;margin-top:4px;display:block;}
+.sidebar-hotel{padding:1rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.04);background:rgba(201,169,110,0.03);}
+.sidebar-hotel-dot{width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block;margin-right:6px;}
+.sidebar-hotel-name{font-size:11px;color:var(--white);font-weight:500;}
+.sidebar-hotel-role{font-size:10px;color:var(--gray);margin-top:2px;}
+.sidebar-nav{flex:1;padding:1rem 0;overflow-y:auto;}
+.nav-section-label{font-size:9px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;padding:0.75rem 1.5rem 0.25rem;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:0.6rem 1.5rem;cursor:pointer;transition:all 0.15s;font-size:12px;color:var(--gray2);border-left:2px solid transparent;}
+.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.03);}
+.nav-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,169,110,0.05);}
+.nav-item .nav-icon{font-size:14px;width:18px;text-align:center;}
+.sidebar-footer{padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,0.04);}
+.sidebar-user{font-size:11px;color:var(--gray2);}
+.sidebar-logout{font-size:10px;color:var(--gray);cursor:pointer;margin-top:4px;letter-spacing:1px;}
+.sidebar-logout:hover{color:var(--red);}
+.main{margin-left:220px;min-height:100vh;}
+.topbar{padding:1.25rem 2rem;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:space-between;background:var(--dark2);position:sticky;top:0;z-index:40;}
+.topbar-title{font-size:14px;font-weight:500;color:var(--white);}
+.topbar-date{font-size:11px;color:var(--gray2);font-family:var(--mono);}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.topbar-badge{display:flex;align-items:center;gap:5px;background:rgba(61,190,122,0.1);border:1px solid rgba(61,190,122,0.2);padding:4px 10px;border-radius:20px;font-size:10px;color:var(--green);}
+.topbar-badge span{width:5px;height:5px;background:var(--green);border-radius:50%;}
+.content{padding:2rem;}
+.view{display:none;}
+.view.active{display:block;}
+.director-only{display:none;}
+.role-director .director-only{display:block;}
 
-/* KPI CARDS */
-.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-bottom: 2rem; }
-.kpi-card { background: var(--dark2); border: 1px solid rgba(255,255,255,0.08); padding: 1.5rem; position: relative; overflow: hidden; }
-.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); opacity: 0.5; }
-.kpi-label { font-size: 10px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; }
-.kpi-value { font-size: 32px; font-weight: 700; color: var(--gold); letter-spacing: 1px; line-height: 1; }
-.kpi-sub { font-size: 11px; color: var(--gray); margin-top: 6px; }
-.kpi-icon { position: absolute; top: 1.2rem; right: 1.2rem; font-size: 20px; opacity: 0.3; }
+/* SECTION HEADER */
+.section-header{margin-bottom:1.5rem;}
+.section-title{font-size:16px;font-weight:500;color:var(--white);}
+.section-sub{font-size:11px;color:var(--gray2);margin-top:3px;}
 
-/* SECTION HEADERS */
-.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
-.section-heading { font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
-.section-count { font-size: 11px; color: var(--gray); background: var(--dark3); padding: 3px 10px; }
+/* KPI GRID */
+.kpi-grid{display:grid;gap:1rem;margin-bottom:1.5rem;}
+.kpi-grid-4{grid-template-columns:repeat(4,1fr);}
+.kpi-grid-3{grid-template-columns:repeat(3,1fr);}
+.kpi-grid-2{grid-template-columns:repeat(2,1fr);}
+.kpi-card{background:var(--dark2);border:1px solid rgba(255,255,255,0.06);padding:1.25rem;position:relative;overflow:hidden;border-radius:6px;}
+.kpi-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+.kpi-card.green::after{background:linear-gradient(90deg,var(--green),transparent);}
+.kpi-card.blue::after{background:linear-gradient(90deg,var(--blue),transparent);}
+.kpi-card.purple::after{background:linear-gradient(90deg,var(--purple),transparent);}
+.kpi-card.red::after{background:linear-gradient(90deg,var(--red),transparent);}
+.kpi-label{font-size:9px;color:var(--gray2);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem;}
+.kpi-value{font-size:28px;font-weight:600;color:var(--gold);line-height:1;font-family:var(--mono);}
+.kpi-card.green .kpi-value{color:var(--green);}
+.kpi-card.blue .kpi-value{color:var(--blue);}
+.kpi-card.purple .kpi-value{color:var(--purple);}
+.kpi-sub{font-size:10px;color:var(--gray2);margin-top:6px;}
+.kpi-trend{font-size:10px;margin-top:4px;}
+.kpi-trend.up{color:var(--green);}
+.kpi-trend.down{color:var(--red);}
+.kpi-icon{position:absolute;top:1rem;right:1rem;font-size:18px;opacity:0.2;}
 
-/* TABLES */
-.data-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
-.data-table th { font-size: 10px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; padding: 10px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); font-weight: 500; }
-.data-table td { padding: 14px 16px; font-size: 13px; color: #ccc; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
-.data-table tr:hover td { background: rgba(255,255,255,0.02); }
-.badge { display: inline-block; padding: 3px 10px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
-.badge-pending { background: rgba(201,169,110,0.15); color: var(--gold); }
-.badge-done { background: rgba(76,175,125,0.15); color: var(--green); }
-.badge-checkin { background: rgba(92,142,224,0.15); color: var(--blue); }
-.badge-deluxe { background: rgba(201,169,110,0.1); color: var(--gold); }
-.badge-junior { background: rgba(255,255,255,0.08); color: #ccc; }
+/* GRID 2 COL */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.grid-3-1{display:grid;grid-template-columns:2fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.grid-1-2{display:grid;grid-template-columns:1fr 2fr;gap:1rem;margin-bottom:1.5rem;}
 
-/* PANELS */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-.panel { background: var(--dark2); border: 1px solid rgba(255,255,255,0.08); padding: 1.5rem; margin-bottom: 1.5rem; }
+/* CARDS */
+.card{background:var(--dark2);border:1px solid rgba(255,255,255,0.06);padding:1.25rem;border-radius:6px;}
+.card-title{font-size:10px;color:var(--gray2);letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;}
+.card-badge{background:rgba(201,169,110,0.1);color:var(--gold);padding:2px 8px;border-radius:10px;font-size:9px;}
 
-/* STAT BARS */
-.stat-bar-wrap { margin-bottom: 1.2rem; }
-.stat-bar-label { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-bottom: 6px; }
-.stat-bar-track { height: 4px; background: var(--dark3); border-radius: 2px; overflow: hidden; }
-.stat-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; }
+/* CHART BARS */
+.chart-bars{display:flex;align-items:flex-end;gap:4px;height:80px;}
+.chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.chart-bar{width:100%;background:var(--dark3);border-radius:2px 2px 0 0;transition:background 0.2s;cursor:pointer;}
+.chart-bar:hover{background:var(--gold-light);}
+.chart-bar.active{background:var(--gold);}
+.chart-bar.green{background:rgba(61,190,122,0.4);}
+.chart-bar.green.active{background:var(--green);}
+.chart-label{font-size:8px;color:var(--gray);font-family:var(--mono);}
 
-/* CHART */
-.chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 80px; padding-top: 10px; }
-.chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.chart-bar { width: 100%; background: var(--gold-dim); border-radius: 2px 2px 0 0; cursor: pointer; }
-.chart-bar.current { background: var(--gold); }
-.chart-bar:hover { background: var(--gold-light); }
-.chart-label { font-size: 9px; color: var(--gray); }
+/* TABLE */
+.table{width:100%;border-collapse:collapse;}
+.table th{font-size:9px;color:var(--gray2);letter-spacing:1.5px;text-transform:uppercase;padding:0 0 0.75rem;text-align:left;border-bottom:1px solid rgba(255,255,255,0.06);}
+.table td{font-size:12px;color:var(--gray2);padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.table td:first-child{color:var(--white);}
+.table tr:last-child td{border-bottom:none;}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:500;letter-spacing:0.5px;}
+.badge-green{background:rgba(61,190,122,0.12);color:var(--green);}
+.badge-yellow{background:rgba(201,169,110,0.12);color:var(--gold);}
+.badge-red{background:rgba(224,92,92,0.12);color:var(--red);}
+.badge-blue{background:rgba(92,142,224,0.12);color:var(--blue);}
 
-/* ACTIVITY */
-.activity-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: flex-start; }
-.activity-item:last-child { border-bottom: none; }
-.activity-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-.activity-text { font-size: 12px; color: #aaa; line-height: 1.5; flex: 1; }
-.activity-time { font-size: 10px; color: var(--gray); flex-shrink: 0; }
+/* NATIONALITY BAR */
+.nat-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.nat-flag{font-size:14px;width:20px;}
+.nat-name{font-size:11px;color:var(--gray2);width:80px;flex-shrink:0;}
+.nat-bar-wrap{flex:1;height:6px;background:var(--dark3);border-radius:3px;overflow:hidden;}
+.nat-bar{height:100%;background:var(--gold);border-radius:3px;}
+.nat-count{font-size:10px;color:var(--gray);font-family:var(--mono);width:30px;text-align:right;}
 
-.empty-state { text-align: center; padding: 3rem; color: var(--gray); font-size: 13px; }
-.loading-spinner { text-align: center; padding: 2rem; color: var(--gray); font-size: 12px; }
+/* ZORA ACTIVITY */
+.activity-item{display:flex;align-items:flex-start;gap:10px;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.activity-item:last-child{border-bottom:none;}
+.activity-dot{width:6px;height:6px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.activity-dot.green{background:var(--green);}
+.activity-dot.gold{background:var(--gold);}
+.activity-dot.blue{background:var(--blue);}
+.activity-text{font-size:11px;color:var(--gray2);line-height:1.5;}
+.activity-time{font-size:10px;color:var(--gray);font-family:var(--mono);margin-left:auto;flex-shrink:0;}
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--dark); }
-::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+/* SCORE CIRCLE */
+.score-circle{width:70px;height:70px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto 0.75rem;}
+.score-num{font-size:20px;font-weight:600;color:var(--gold);font-family:var(--mono);}
+.score-label{font-size:8px;color:var(--gray);letter-spacing:1px;}
 
-@media (max-width: 900px) {
-  .sidebar { width: 60px; }
-  .sidebar-logo-text, .sidebar-logo-sub, .sidebar-hotel, .nav-section-label { display: none; }
-  .nav-item span:last-child { display: none; }
-  .nav-item { justify-content: center; padding: 12px; }
-  .main { margin-left: 60px; }
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  .two-col { grid-template-columns: 1fr; }
+/* RECEPTION TABLE */
+.guest-row{display:flex;align-items:center;gap:12px;padding:0.75rem 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.guest-row:last-child{border-bottom:none;}
+.guest-avatar{width:32px;height:32px;border-radius:50%;background:var(--dark3);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);font-weight:600;flex-shrink:0;}
+.guest-name{font-size:12px;color:var(--white);font-weight:500;}
+.guest-room{font-size:10px;color:var(--gray2);}
+.guest-meta{margin-left:auto;text-align:right;}
+.guest-time{font-size:10px;color:var(--gray);font-family:var(--mono);}
+.guest-flag{font-size:14px;}
+
+/* REQUEST ITEM */
+.request-item{padding:0.75rem;background:var(--dark3);border-radius:4px;margin-bottom:8px;border-left:2px solid var(--gold);}
+.request-item.urgent{border-left-color:var(--red);}
+.request-item.done{border-left-color:var(--green);opacity:0.7;}
+.request-guest{font-size:11px;color:var(--white);font-weight:500;margin-bottom:3px;}
+.request-text{font-size:11px;color:var(--gray2);}
+.request-footer{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
+.request-time{font-size:9px;color:var(--gray);font-family:var(--mono);}
+
+/* ZORA STATS BAR */
+.zora-stat{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.zora-stat:last-child{border-bottom:none;}
+.zora-stat-label{font-size:11px;color:var(--gray2);}
+.zora-stat-value{font-size:13px;font-weight:600;color:var(--gold);font-family:var(--mono);}
+
+@media(max-width:900px){
+  .sidebar{width:60px;}
+  .sidebar-logo-text,.sidebar-logo-sub,.sidebar-hotel-name,.sidebar-hotel-role,.nav-section-label,.nav-item span:not(.nav-icon),.sidebar-user,.sidebar-logout{display:none;}
+  .main{margin-left:60px;}
+  .kpi-grid-4{grid-template-columns:repeat(2,1fr);}
+  .grid-2,.grid-3-1,.grid-1-2{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -149,23 +191,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="login-box">
     <div class="login-logo">
       <span class="login-logo-text">ZORA</span>
-      <span class="login-logo-sub">Hotel Dashboard</span>
+      <span class="login-logo-sub">Hotel Intelligence Platform</span>
     </div>
-    <p class="login-title">Sign in to your hotel</p>
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <div class="login-badge"><span></span><p>System Online · Luzern 🇨🇭</p></div>
+    </div>
     <div class="login-field">
-      <label>Username</label>
-      <input type="text" id="login-user" placeholder="email@zorai.ch" />
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="your@hotel.ch" autocomplete="email">
     </div>
     <div class="login-field">
       <label>Password</label>
-      <input type="password" id="login-pass" placeholder="••••••••" />
+      <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
     </div>
-    <p class="login-error" id="login-error">Invalid credentials. Please try again.</p>
+    <div class="login-error" id="login-error">Invalid credentials. Please try again.</div>
     <button class="login-btn" onclick="doLogin()">Access Dashboard</button>
-    <div class="login-forgot">
-      <a href="/cdn-cgi/l/email-protection#6801060e072812071a0901460b00571b1d0a020d0b1c5538091b1b1f071a0c483a0d1b0d1c">Forgot password? Contact support</a>
-    </div>
-    <p class="login-footer">Powered by ZORA · zorai.ch</p>
+    <div class="login-footer">🇨🇭 Secure Swiss Data Processing · zorai.ch</div>
   </div>
 </div>
 
@@ -174,340 +215,534 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="sidebar">
     <div class="sidebar-logo">
       <div class="sidebar-logo-text">ZORA</div>
-      <span class="sidebar-logo-sub">Hotel Dashboard</span>
+      <span class="sidebar-logo-sub">Hotel Intelligence</span>
     </div>
     <div class="sidebar-hotel">
-      <div class="sidebar-hotel-name" id="sidebar-hotel-name">Hotel Zora Luzern</div>
-      <div class="sidebar-hotel-role" id="sidebar-role">Reception</div>
+      <div><span class="sidebar-hotel-dot"></span><span class="sidebar-hotel-name" id="hotel-name">Hotel Zora Luzern</span></div>
+      <div class="sidebar-hotel-role" id="user-role-label">Director</div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section-label">Overview</div>
-      <div class="nav-item active" id="nav-today" onclick="showView('today')">
-        <span class="nav-icon">📋</span><span>Today</span>
+      <div class="nav-item active" id="nav-overview" onclick="showView('overview')">
+        <span class="nav-icon">⊞</span><span>Dashboard</span>
+      </div>
+      <div class="nav-item director-only" id="nav-revenue" onclick="showView('revenue')">
+        <span class="nav-icon">◈</span><span>Revenue</span>
       </div>
       <div class="nav-item" id="nav-guests" onclick="showView('guests')">
-        <span class="nav-icon">🛎️</span><span>Guests</span>
+        <span class="nav-icon">◉</span><span>Guests</span>
       </div>
       <div class="nav-item" id="nav-requests" onclick="showView('requests')">
-        <span class="nav-icon">⭐</span><span>Special Requests</span>
+        <span class="nav-icon">◎</span><span>Requests</span>
       </div>
       <div class="nav-section-label director-only">Analytics</div>
-      <div class="nav-item director-only" id="nav-stats" onclick="showView('stats')">
-        <span class="nav-icon">📊</span><span>Monthly Stats</span>
+      <div class="nav-item director-only" id="nav-reputation" onclick="showView('reputation')">
+        <span class="nav-icon">★</span><span>Reputation</span>
+      </div>
+      <div class="nav-section-label">Automation</div>
+      <div class="nav-item" id="nav-zora" onclick="showView('zora')">
+        <span class="nav-icon">⚡</span><span>ZORA Activity</span>
       </div>
     </nav>
-    <div class="sidebar-bottom">
-      <div class="logout-btn" onclick="doLogout()">
-        <span>🚪</span><span>Sign out</span>
-      </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebar-user">director@zorai.ch</div>
+      <div class="sidebar-logout" onclick="doLogout()">↩ Sign out</div>
     </div>
   </div>
 
   <div class="main">
     <div class="topbar">
-      <div class="topbar-title" id="topbar-title">Today's Overview</div>
+      <div>
+        <div class="topbar-title" id="view-title">Dashboard Overview</div>
+        <div class="topbar-date" id="topbar-date"></div>
+      </div>
       <div class="topbar-right">
-        <span class="topbar-date" id="topbar-date"></span>
-        <div class="live-badge"><div class="live-dot"></div>Live</div>
-        <button class="refresh-btn" onclick="loadData()">Refresh</button>
+        <div class="topbar-badge"><span></span>ZORA Active · 47 emails handled today</div>
       </div>
     </div>
 
-    <!-- TODAY VIEW -->
-    <div class="view active" id="view-today">
-      <div class="kpi-grid">
-        <div class="kpi-card"><div class="kpi-icon">🏨</div><div class="kpi-label">Check-ins Today</div><div class="kpi-value" id="kpi-checkins">—</div><div class="kpi-sub">Arrivals expected</div></div>
-        <div class="kpi-card"><div class="kpi-icon">🧳</div><div class="kpi-label">Check-outs Today</div><div class="kpi-value" id="kpi-checkouts">—</div><div class="kpi-sub">Departures today</div></div>
-        <div class="kpi-card"><div class="kpi-icon">⭐</div><div class="kpi-label">Pending Requests</div><div class="kpi-value" id="kpi-requests">—</div><div class="kpi-sub">Require attention</div></div>
-        <div class="kpi-card"><div class="kpi-icon">📧</div><div class="kpi-label">Emails by ZORA</div><div class="kpi-value" id="kpi-emails">—</div><div class="kpi-sub">Handled automatically</div></div>
-      </div>
-      <div class="section-header">
-        <span class="section-heading">Arrivals Today</span>
-        <span class="section-count" id="count-arrivals">0 guests</span>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Guest</th><th>Room Type</th><th>Check-out</th><th>Special Request</th><th>Status</th></tr></thead>
-        <tbody id="table-arrivals"><tr><td colspan="5" class="loading-spinner">Loading...</td></tr></tbody>
-      </table>
-      <div class="section-header">
-        <span class="section-heading">Departures Today</span>
-        <span class="section-count" id="count-departures">0 guests</span>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Guest</th><th>Room Type</th><th>Check-in was</th><th>Review Sent</th></tr></thead>
-        <tbody id="table-departures"><tr><td colspan="4" class="loading-spinner">Loading...</td></tr></tbody>
-      </table>
-    </div>
+    <div class="content">
 
-    <!-- GUESTS VIEW -->
-    <div class="view" id="view-guests">
-      <div class="section-header">
-        <span class="section-heading">All Guests</span>
-        <span class="section-count" id="count-all-guests">—</span>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Guest</th><th>Email</th><th>Check-in</th><th>Check-out</th><th>Room</th><th>Special Request</th></tr></thead>
-        <tbody id="table-all-guests"><tr><td colspan="6" class="loading-spinner">Loading...</td></tr></tbody>
-      </table>
-    </div>
+      <!-- ========== OVERVIEW ========== -->
+      <div class="view active" id="view-overview">
 
-    <!-- REQUESTS VIEW -->
-    <div class="view" id="view-requests">
-      <div class="section-header">
-        <span class="section-heading">Special Requests</span>
-        <span class="section-count" id="count-all-requests">—</span>
-      </div>
-      <table class="data-table">
-        <thead><tr><th>Guest</th><th>Request</th><th>Check-in</th><th>Status</th></tr></thead>
-        <tbody id="table-all-requests"><tr><td colspan="4" class="loading-spinner">Loading...</td></tr></tbody>
-      </table>
-    </div>
+        <!-- DIRECTOR VIEW -->
+        <div class="director-only">
+          <div class="section-header">
+            <div class="section-title">Good morning — here's your hotel at a glance</div>
+            <div class="section-sub">April 2026 · Updated just now</div>
+          </div>
 
-    <!-- STATS VIEW -->
-    <div class="view director-only" id="view-stats">
-      <div class="kpi-grid" style="grid-template-columns: repeat(4,1fr);">
-        <div class="kpi-card"><div class="kpi-icon">📅</div><div class="kpi-label">Reservations This Month</div><div class="kpi-value" id="stat-reservations">—</div><div class="kpi-sub">Total bookings</div></div>
-        <div class="kpi-card"><div class="kpi-icon">💰</div><div class="kpi-label">Estimated Revenue</div><div class="kpi-value" id="stat-revenue">—</div><div class="kpi-sub">CHF this month</div></div>
-        <div class="kpi-card"><div class="kpi-icon">⭐</div><div class="kpi-label">Special Requests</div><div class="kpi-value" id="stat-special">—</div><div class="kpi-sub">This month</div></div>
-        <div class="kpi-card"><div class="kpi-icon">⏱️</div><div class="kpi-label">Hours Saved by ZORA</div><div class="kpi-value" id="stat-hours">—</div><div class="kpi-sub">Estimated this month</div></div>
-      </div>
-      <div class="two-col">
-        <div class="panel"><div class="section-header" style="margin-bottom:1.5rem;"><span class="section-heading">Reservations by Month</span></div><div class="chart-bars" id="monthly-chart"></div></div>
-        <div class="panel"><div class="section-header" style="margin-bottom:1.5rem;"><span class="section-heading">Room Type Occupancy</span></div><div id="room-stats"></div></div>
-      </div>
-      <div class="two-col">
-        <div class="panel"><div class="section-header" style="margin-bottom:1.5rem;"><span class="section-heading">Top Guest Nationalities</span></div><div id="nationality-stats"></div></div>
-        <div class="panel"><div class="section-header" style="margin-bottom:1.5rem;"><span class="section-heading">Automation Performance</span></div><div id="automation-stats"></div></div>
-      </div>
-      <div class="panel"><div class="section-header" style="margin-bottom:1.5rem;"><span class="section-heading">Recent Activity</span></div><div id="activity-feed"></div></div>
-    </div>
+          <div class="kpi-grid kpi-grid-4">
+            <div class="kpi-card">
+              <div class="kpi-icon">🏨</div>
+              <div class="kpi-label">Occupancy Rate</div>
+              <div class="kpi-value">78<span style="font-size:16px;color:var(--gray2)">%</span></div>
+              <div class="kpi-sub">24 rooms available</div>
+              <div class="kpi-trend up">↑ +6% vs last month</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-icon">💰</div>
+              <div class="kpi-label">RevPAR</div>
+              <div class="kpi-value" style="font-size:22px;">CHF 152</div>
+              <div class="kpi-sub">Revenue per available room</div>
+              <div class="kpi-trend up">↑ +12% vs April 2025</div>
+            </div>
+            <div class="kpi-card blue">
+              <div class="kpi-icon">📊</div>
+              <div class="kpi-label">ADR</div>
+              <div class="kpi-value" style="font-size:22px;">CHF 195</div>
+              <div class="kpi-sub">Average daily rate</div>
+              <div class="kpi-trend up">↑ +8% vs last month</div>
+            </div>
+            <div class="kpi-card purple">
+              <div class="kpi-icon">📈</div>
+              <div class="kpi-label">GOPPAR</div>
+              <div class="kpi-value" style="font-size:22px;">CHF 89</div>
+              <div class="kpi-sub">Gross operating profit/room</div>
+              <div class="kpi-trend up">↑ +4% vs target</div>
+            </div>
+          </div>
 
-  </div>
-</div>
+          <div class="kpi-grid kpi-grid-4">
+            <div class="kpi-card">
+              <div class="kpi-icon">🛎</div>
+              <div class="kpi-label">Check-ins Today</div>
+              <div class="kpi-value">8</div>
+              <div class="kpi-sub">Arrivals expected</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon">🧳</div>
+              <div class="kpi-label">Check-outs Today</div>
+              <div class="kpi-value">5</div>
+              <div class="kpi-sub">Departures today</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon">⭐</div>
+              <div class="kpi-label">Pending Requests</div>
+              <div class="kpi-value">3</div>
+              <div class="kpi-sub">Require attention</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-icon">⚡</div>
+              <div class="kpi-label">Emails by ZORA</div>
+              <div class="kpi-value">47</div>
+              <div class="kpi-sub">Handled automatically today</div>
+            </div>
+          </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-var USERS = {
-  'recepcion@zorai.ch': { pass: '123456789', role: 'reception', hotel: 'Hotel Zora Luzern' },
-  'director@zorai.ch':  { pass: '123456789', role: 'director',  hotel: 'Hotel Zora Luzern' }
+          <div class="grid-3-1">
+            <div class="card">
+              <div class="card-title">Occupancy this month <span class="card-badge">April 2026</span></div>
+              <div class="chart-bars">
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:55%"></div><div class="chart-label">W1</div></div>
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:72%"></div><div class="chart-label">W2</div></div>
+                <div class="chart-bar-wrap"><div class="chart-bar active" style="height:78%"></div><div class="chart-label">W3</div></div>
+                <div class="chart-bar-wrap"><div class="chart-bar" style="height:65%"></div><div class="chart-label">W4</div></div>
+                <div class="chart-bar green" style="height:82%;flex:1;border-radius:2px 2px 0 0;align-self:flex-end;margin-bottom:20px;cursor:pointer;"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:1rem;">
+                <div style="text-align:center;"><div style="font-size:18px;font-weight:600;color:var(--gold);font-family:var(--mono);">CHF 36.4k</div><div style="font-size:9px;color:var(--gray2);margin-top:2px;">Revenue MTD</div></div>
+                <div style="text-align:center;"><div style="font-size:18px;font-weight:600;color:var(--green);font-family:var(--mono);">78%</div><div style="font-size:9px;color:var(--gray2);margin-top:2px;">Avg Occupancy</div></div>
+                <div style="text-align:center;"><div style="font-size:18px;font-weight:600;color:var(--blue);font-family:var(--mono);">47</div><div style="font-size:9px;color:var(--gray2);margin-top:2px;">Reservations</div></div>
+                <div style="text-align:center;"><div style="font-size:18px;font-weight:600;color:var(--purple);font-family:var(--mono);">CHF 2.1k</div><div style="font-size:9px;color:var(--gray2);margin-top:2px;">Upselling</div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Online Reputation</div>
+              <div class="score-circle"><div class="score-num">8.7</div><div class="score-label">/10</div></div>
+              <div style="text-align:center;">
+                <div style="font-size:10px;color:var(--gray2);margin-bottom:8px;">Booking.com · 124 reviews</div>
+                <div style="font-size:11px;color:var(--green);">↑ +0.3 vs last month</div>
+              </div>
+              <div style="margin-top:1rem;">
+                <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px;"><span style="color:var(--gray2);">Cleanliness</span><span style="color:var(--white);">9.1</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:4px;"><span style="color:var(--gray2);">Location</span><span style="color:var(--white);">9.4</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:10px;"><span style="color:var(--gray2);">Staff</span><span style="color:var(--white);">8.8</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">Top nationalities this month</div>
+              <div class="nat-row"><div class="nat-flag">🇩🇪</div><div class="nat-name">Germany</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:85%"></div></div><div class="nat-count">14</div></div>
+              <div class="nat-row"><div class="nat-flag">🇨🇭</div><div class="nat-name">Switzerland</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:55%"></div></div><div class="nat-count">9</div></div>
+              <div class="nat-row"><div class="nat-flag">🇺🇸</div><div class="nat-name">USA</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:42%"></div></div><div class="nat-count">7</div></div>
+              <div class="nat-row"><div class="nat-flag">🇬🇧</div><div class="nat-name">UK</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:30%"></div></div><div class="nat-count">5</div></div>
+              <div class="nat-row"><div class="nat-flag">🇯🇵</div><div class="nat-name">Japan</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:24%"></div></div><div class="nat-count">4</div></div>
+            </div>
+            <div class="card">
+              <div class="card-title">ZORA automation this month</div>
+              <div class="zora-stat"><div class="zora-stat-label">Emails handled automatically</div><div class="zora-stat-value">312</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Welcome emails sent</div><div class="zora-stat-value">47</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Upselling emails sent</div><div class="zora-stat-value">44</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Special requests logged</div><div class="zora-stat-value">18</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Review requests sent</div><div class="zora-stat-value">42</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Hours saved (estimated)</div><div class="zora-stat-value" style="color:var(--green);">78h</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECEPTION VIEW -->
+        <div class="reception-only" id="reception-overview">
+          <div class="section-header">
+            <div class="section-title">Today's operations</div>
+            <div class="section-sub" id="reception-date-sub">Sunday, 5 April 2026</div>
+          </div>
+          <div class="kpi-grid kpi-grid-4">
+            <div class="kpi-card">
+              <div class="kpi-icon">🛎</div>
+              <div class="kpi-label">Check-ins Today</div>
+              <div class="kpi-value">8</div>
+              <div class="kpi-sub">Next: Thomas Weber 14:30</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon">🧳</div>
+              <div class="kpi-label">Check-outs Today</div>
+              <div class="kpi-value">5</div>
+              <div class="kpi-sub">All processed by 11:00</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon">⭐</div>
+              <div class="kpi-label">Pending Requests</div>
+              <div class="kpi-value">3</div>
+              <div class="kpi-sub">2 urgent</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-icon">⚡</div>
+              <div class="kpi-label">Emails by ZORA</div>
+              <div class="kpi-value">47</div>
+              <div class="kpi-sub">Handled today</div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">Arrivals today</div>
+              <div class="guest-row">
+                <div class="guest-avatar">TW</div>
+                <div><div class="guest-name">Thomas Weber</div><div class="guest-room">Double Room · 2 nights</div></div>
+                <div class="guest-meta"><div class="guest-flag">🇩🇪</div><div class="guest-time">14:30</div></div>
+              </div>
+              <div class="guest-row">
+                <div class="guest-avatar">YN</div>
+                <div><div class="guest-name">Yuki Nakamura</div><div class="guest-room">Junior Suite · 3 nights</div></div>
+                <div class="guest-meta"><div class="guest-flag">🇯🇵</div><div class="guest-time">15:00</div></div>
+              </div>
+              <div class="guest-row">
+                <div class="guest-avatar">CD</div>
+                <div><div class="guest-name">Claire Dubois</div><div class="guest-room">Deluxe Room · 4 nights</div></div>
+                <div class="guest-meta"><div class="guest-flag">🇫🇷</div><div class="guest-time">16:30</div></div>
+              </div>
+              <div class="guest-row">
+                <div class="guest-avatar">AM</div>
+                <div><div class="guest-name">Anna Müller</div><div class="guest-room">Double Room · 2 nights</div></div>
+                <div class="guest-meta"><div class="guest-flag">🇦🇹</div><div class="guest-time">18:00</div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Special requests <span class="card-badge">3 pending</span></div>
+              <div class="request-item urgent">
+                <div class="request-guest">Sophie Martin · Room 204</div>
+                <div class="request-text">Baby cot + extra pillows needed on arrival</div>
+                <div class="request-footer"><div class="request-time">Check-in today 15:00</div><span class="badge badge-red">Urgent</span></div>
+              </div>
+              <div class="request-item">
+                <div class="request-guest">Thomas Weber · Room 112</div>
+                <div class="request-text">Late checkout requested until 14:00</div>
+                <div class="request-footer"><div class="request-time">Check-out tomorrow</div><span class="badge badge-yellow">Pending</span></div>
+              </div>
+              <div class="request-item done">
+                <div class="request-guest">Marco Ferretti · Room 301</div>
+                <div class="request-text">Gluten-free breakfast confirmed</div>
+                <div class="request-footer"><div class="request-time">Resolved 08:30</div><span class="badge badge-green">Done</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== REVENUE ========== -->
+      <div class="view director-only" id="view-revenue">
+        <div class="section-header">
+          <div class="section-title">Revenue & Financial Performance</div>
+          <div class="section-sub">April 2026 · Month to date</div>
+        </div>
+        <div class="kpi-grid kpi-grid-4">
+          <div class="kpi-card green">
+            <div class="kpi-label">Total Revenue MTD</div>
+            <div class="kpi-value" style="font-size:22px;">CHF 36.4k</div>
+            <div class="kpi-trend up">↑ +18% vs April 2025</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">RevPAR</div>
+            <div class="kpi-value" style="font-size:22px;">CHF 152</div>
+            <div class="kpi-trend up">↑ +12% vs last month</div>
+          </div>
+          <div class="kpi-card blue">
+            <div class="kpi-label">ADR</div>
+            <div class="kpi-value" style="font-size:22px;">CHF 195</div>
+            <div class="kpi-trend up">↑ +8% vs budget</div>
+          </div>
+          <div class="kpi-card purple">
+            <div class="kpi-label">Upselling Revenue</div>
+            <div class="kpi-value" style="font-size:22px;">CHF 2.1k</div>
+            <div class="kpi-sub">Generated by ZORA</div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Revenue by room type</div>
+            <table class="table">
+              <tr><th>Room Type</th><th>Sold</th><th>Avg Rate</th><th>Revenue</th></tr>
+              <tr><td>Junior Suite</td><td>18</td><td>CHF 245</td><td>CHF 13.2k</td></tr>
+              <tr><td>Deluxe Room</td><td>22</td><td>CHF 195</td><td>CHF 12.9k</td></tr>
+              <tr><td>Double Room</td><td>29</td><td>CHF 165</td><td>CHF 10.3k</td></tr>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-title">Booking channels</div>
+            <div class="nat-row"><div class="nat-name" style="width:100px;">Booking.com</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:60%;background:var(--blue)"></div></div><div class="nat-count">37%</div></div>
+            <div class="nat-row"><div class="nat-name" style="width:100px;">Direct</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:45%;background:var(--green)"></div></div><div class="nat-count">28%</div></div>
+            <div class="nat-row"><div class="nat-name" style="width:100px;">Expedia</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:35%"></div></div><div class="nat-count">22%</div></div>
+            <div class="nat-row"><div class="nat-name" style="width:100px;">Other OTA</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:20%;background:var(--purple)"></div></div><div class="nat-count">13%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== GUESTS ========== -->
+      <div class="view" id="view-guests">
+        <div class="section-header">
+          <div class="section-title">Current & Upcoming Guests</div>
+          <div class="section-sub">In-house: 19 guests · Arrivals today: 8</div>
+        </div>
+        <div class="card">
+          <div class="card-title">In-house guests</div>
+          <table class="table">
+            <tr><th>Guest</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Nationality</th><th>Status</th></tr>
+            <tr><td>Thomas Weber</td><td>112</td><td>05 Apr</td><td>07 Apr</td><td>🇩🇪</td><td><span class="badge badge-blue">Checking in</span></td></tr>
+            <tr><td>Sophie Martin</td><td>204</td><td>05 Apr</td><td>09 Apr</td><td>🇫🇷</td><td><span class="badge badge-yellow">Baby cot req.</span></td></tr>
+            <tr><td>Yuki Nakamura</td><td>305</td><td>05 Apr</td><td>08 Apr</td><td>🇯🇵</td><td><span class="badge badge-green">Confirmed</span></td></tr>
+            <tr><td>Marco Ferretti</td><td>301</td><td>03 Apr</td><td>07 Apr</td><td>🇮🇹</td><td><span class="badge badge-green">In-house</span></td></tr>
+            <tr><td>Claire Dubois</td><td>208</td><td>05 Apr</td><td>09 Apr</td><td>🇫🇷</td><td><span class="badge badge-blue">Checking in</span></td></tr>
+            <tr><td>James O'Brien</td><td>115</td><td>04 Apr</td><td>07 Apr</td><td>🇮🇪</td><td><span class="badge badge-green">In-house</span></td></tr>
+            <tr><td>Anna Müller</td><td>202</td><td>05 Apr</td><td>07 Apr</td><td>🇦🇹</td><td><span class="badge badge-blue">Checking in</span></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========== REQUESTS ========== -->
+      <div class="view" id="view-requests">
+        <div class="section-header">
+          <div class="section-title">Special Requests</div>
+          <div class="section-sub">3 pending · 2 urgent · 15 resolved this month</div>
+        </div>
+        <div class="grid-2">
+          <div>
+            <div style="font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:0.75rem;">PENDING</div>
+            <div class="request-item urgent">
+              <div class="request-guest">Sophie Martin · Room 204</div>
+              <div class="request-text">Baby cot + extra pillows needed on arrival today</div>
+              <div class="request-footer"><div class="request-time">Check-in 15:00 today</div><span class="badge badge-red">Urgent</span></div>
+            </div>
+            <div class="request-item urgent">
+              <div class="request-guest">Yuki Nakamura · Room 305</div>
+              <div class="request-text">Allergy to feather pillows — hypoallergenic required</div>
+              <div class="request-footer"><div class="request-time">Check-in 15:00 today</div><span class="badge badge-red">Urgent</span></div>
+            </div>
+            <div class="request-item">
+              <div class="request-guest">Thomas Weber · Room 112</div>
+              <div class="request-text">Late checkout until 14:00 on 7 April</div>
+              <div class="request-footer"><div class="request-time">Check-out 07 Apr</div><span class="badge badge-yellow">Pending</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--gray2);letter-spacing:2px;margin-bottom:0.75rem;">RESOLVED THIS WEEK</div>
+            <div class="request-item done">
+              <div class="request-guest">Marco Ferretti · Room 301</div>
+              <div class="request-text">Gluten-free breakfast confirmed for entire stay</div>
+              <div class="request-footer"><div class="request-time">Resolved 04 Apr 08:30</div><span class="badge badge-green">Done</span></div>
+            </div>
+            <div class="request-item done">
+              <div class="request-guest">James O'Brien · Room 115</div>
+              <div class="request-text">Airport transfer arranged for 07 Apr at 10:00</div>
+              <div class="request-footer"><div class="request-time">Resolved 03 Apr 14:00</div><span class="badge badge-green">Done</span></div>
+            </div>
+            <div class="request-item done">
+              <div class="request-guest">Claire Dubois · Room 208</div>
+              <div class="request-text">Romantic package confirmed — flowers + wine + late checkout</div>
+              <div class="request-footer"><div class="request-time">Resolved 04 Apr 10:15</div><span class="badge badge-green">Done</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== REPUTATION ========== -->
+      <div class="view director-only" id="view-reputation">
+        <div class="section-header">
+          <div class="section-title">Online Reputation</div>
+          <div class="section-sub">Booking.com · TripAdvisor · Google</div>
+        </div>
+        <div class="kpi-grid kpi-grid-3">
+          <div class="kpi-card green">
+            <div class="kpi-label">Booking.com Score</div>
+            <div class="kpi-value">8.7</div>
+            <div class="kpi-sub">124 verified reviews</div>
+            <div class="kpi-trend up">↑ +0.3 vs last month</div>
+          </div>
+          <div class="kpi-card blue">
+            <div class="kpi-label">TripAdvisor</div>
+            <div class="kpi-value">4.4<span style="font-size:14px;color:var(--gray2)">/5</span></div>
+            <div class="kpi-sub">89 reviews · Certificate of Excellence</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Google Rating</div>
+            <div class="kpi-value">4.6<span style="font-size:14px;color:var(--gray2)">/5</span></div>
+            <div class="kpi-sub">203 Google reviews</div>
+            <div class="kpi-trend up">↑ +0.1 this month</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Booking.com category scores</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:0.5rem;">
+            <div><div class="nat-row"><div class="nat-name" style="width:90px;">Cleanliness</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:91%;background:var(--green)"></div></div><div class="nat-count">9.1</div></div></div>
+            <div><div class="nat-row"><div class="nat-name" style="width:90px;">Location</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:94%;background:var(--green)"></div></div><div class="nat-count">9.4</div></div></div>
+            <div><div class="nat-row"><div class="nat-name" style="width:90px;">Staff</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:88%"></div></div><div class="nat-count">8.8</div></div></div>
+            <div><div class="nat-row"><div class="nat-name" style="width:90px;">Comfort</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:85%"></div></div><div class="nat-count">8.5</div></div></div>
+            <div><div class="nat-row"><div class="nat-name" style="width:90px;">Value</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:80%"></div></div><div class="nat-count">8.0</div></div></div>
+            <div><div class="nat-row"><div class="nat-name" style="width:90px;">WiFi</div><div class="nat-bar-wrap"><div class="nat-bar" style="width:92%;background:var(--green)"></div></div><div class="nat-count">9.2</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== ZORA ACTIVITY ========== -->
+      <div class="view" id="view-zora">
+        <div class="section-header">
+          <div class="section-title">ZORA Automation Activity</div>
+          <div class="section-sub">Real-time log of automated actions</div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Today's activity</div>
+            <div class="activity-item">
+              <div class="activity-dot green"></div>
+              <div class="activity-text">Welcome email sent to <strong>Thomas Weber</strong> with Lucerne Guest Card QR code</div>
+              <div class="activity-time">08:14</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot gold"></div>
+              <div class="activity-text">Special request logged: <strong>Sophie Martin</strong> — baby cot + extra pillows</div>
+              <div class="activity-time">09:32</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot green"></div>
+              <div class="activity-text">Upselling email sent to <strong>Yuki Nakamura</strong> — room upgrade offer</div>
+              <div class="activity-time">10:05</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot blue"></div>
+              <div class="activity-text">FAQ answered automatically: check-in time enquiry from <strong>new guest</strong></div>
+              <div class="activity-time">11:18</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot green"></div>
+              <div class="activity-text">Review request sent to <strong>Marco Ferretti</strong> after checkout</div>
+              <div class="activity-time">11:45</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot gold"></div>
+              <div class="activity-text">Special request logged: <strong>Yuki Nakamura</strong> — hypoallergenic pillows</div>
+              <div class="activity-time">12:03</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot blue"></div>
+              <div class="activity-text">WhatsApp message answered: parking enquiry from <strong>arriving guest</strong></div>
+              <div class="activity-time">14:22</div>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:1rem;">
+              <div class="card-title">This month's automation</div>
+              <div class="zora-stat"><div class="zora-stat-label">Emails handled automatically</div><div class="zora-stat-value">312</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Welcome emails sent</div><div class="zora-stat-value">47</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Upselling emails sent</div><div class="zora-stat-value">44</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">FAQs answered automatically</div><div class="zora-stat-value">189</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Special requests logged</div><div class="zora-stat-value">18</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Review requests sent</div><div class="zora-stat-value">42</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">WhatsApp messages answered</div><div class="zora-stat-value">76</div></div>
+              <div class="zora-stat"><div class="zora-stat-label" style="color:var(--green);">Hours saved (estimated)</div><div class="zora-stat-value" style="color:var(--green);">78h</div></div>
+            </div>
+            <div class="card">
+              <div class="card-title">Upselling revenue by ZORA</div>
+              <div class="zora-stat"><div class="zora-stat-label">Room upgrades accepted</div><div class="zora-stat-value">8 × CHF 60</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Romantic packages</div><div class="zora-stat-value">4 × CHF 95</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Late checkout</div><div class="zora-stat-value">11 × CHF 30</div></div>
+              <div class="zora-stat"><div class="zora-stat-label">Swiss wine on arrival</div><div class="zora-stat-value">6 × CHF 45</div></div>
+              <div style="margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;">
+                <div style="font-size:11px;color:var(--gray2);">Total upselling revenue</div>
+                <div style="font-size:16px;font-weight:600;color:var(--green);font-family:var(--mono);">CHF 2.120</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /dashboard -->
+
+<script>
+const USERS = {
+  'director@zorai.ch': { pass:'director2026', role:'director', name:'Director', hotel:'Hotel Zora Luzern' },
+  'recepcion@zorai.ch': { pass:'recepcion2026', role:'reception', name:'Reception', hotel:'Hotel Zora Luzern' }
 };
 
-var SHEET_BASE_URL = 'https://script.google.com/macros/s/AKfycby2FkgFTeKrMzak1gxIyAaZSDeYJapxJjn0mdfYpYb-1Q-eFB3YeF_C4xPIuvGO4bmL/exec';
-
-var currentRole = '';
-var allRows = [];
-
-function today() { return new Date().toISOString().split('T')[0]; }
-function normalizeDate(d) {
-  if (!d) return '';
-  return String(d).substring(0, 10);
-}
-function formatDate(d) {
-  if (!d) return '—';
-  var str = normalizeDate(String(d));
-  var p = str.split('-');
-  return p.length === 3 ? p[2]+'.'+p[1]+'.'+p[0] : str;
-}
-
-function setTopbarDate() {
-  var now = new Date();
-  document.getElementById('topbar-date').textContent = now.toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-}
-
-function doLogin() {
-  var user = document.getElementById('login-user').value.trim().toLowerCase();
-  var pass = document.getElementById('login-pass').value;
-  var err  = document.getElementById('login-error');
-  if (USERS[user] && USERS[user].pass === pass) {
-    err.style.display = 'none';
-    currentRole = USERS[user].role;
-    document.getElementById('sidebar-hotel-name').textContent = USERS[user].hotel;
-    document.getElementById('sidebar-role').textContent = currentRole === 'director' ? 'Director' : 'Reception';
-    if (currentRole === 'director') {
-      document.body.classList.add('role-director');
-      document.querySelectorAll('.director-only').forEach(function(el) { el.style.display = 'block'; });
-    }
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard-screen').style.display = 'block';
-    setTopbarDate();
-    loadData();
-    startAutoRefresh();
+function doLogin(){
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const user = USERS[email];
+  if(user && user.pass === pass){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('dashboard-screen').style.display='block';
+    const db = document.getElementById('dashboard-screen');
+    if(user.role==='director') db.classList.add('role-director');
+    document.getElementById('hotel-name').textContent = user.hotel;
+    document.getElementById('user-role-label').textContent = user.name;
+    document.getElementById('sidebar-user').textContent = email;
+    const recepEl = document.getElementById('reception-overview');
+    if(user.role==='director') recepEl.style.display='none';
+    else recepEl.style.display='block';
+    setDate();
   } else {
-    err.style.display = 'block';
+    document.getElementById('login-error').style.display='block';
   }
 }
 
-function doLogout() {
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('dashboard-screen').style.display = 'none';
-  document.getElementById('login-user').value = '';
-  document.getElementById('login-pass').value = '';
-  document.body.classList.remove('role-director');
-  currentRole = '';
-  allRows = [];
+function doLogout(){
+  location.reload();
 }
 
-function showView(name) {
-  var titles = { today:"Today's Overview", guests:'All Guests', requests:'Special Requests', stats:'Monthly Statistics' };
-  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
-  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
-  document.getElementById('view-'+name).classList.add('active');
-  document.getElementById('nav-'+name).classList.add('active');
-  document.getElementById('topbar-title').textContent = titles[name] || '';
+function showView(v){
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  const el = document.getElementById('view-'+v);
+  const nav = document.getElementById('nav-'+v);
+  if(el) el.classList.add('active');
+  if(nav) nav.classList.add('active');
+  const titles = {overview:'Dashboard Overview',revenue:'Revenue & Financial',guests:'Guest Management',requests:'Special Requests',reputation:'Online Reputation',zora:'ZORA Activity'};
+  document.getElementById('view-title').textContent = titles[v]||'Dashboard';
 }
 
-function loadData() {
-  fetch(SHEET_BASE_URL)
-    .then(function(r) { return r.json(); })
-    .then(function(data) { allRows = data; renderAll(); })
-    .catch(function() { loadDemoData(); });
+function setDate(){
+  const now = new Date();
+  const opts = {weekday:'long',year:'numeric',month:'long',day:'numeric'};
+  document.getElementById('topbar-date').textContent = now.toLocaleDateString('en-GB',opts);
+  const sub = document.getElementById('reception-date-sub');
+  if(sub) sub.textContent = now.toLocaleDateString('en-GB',opts);
 }
 
-function startAutoRefresh() {
-  setInterval(function() { loadData(); }, 60000);
-}
-
-function parseCSV(text) {
-  var lines = text.trim().split('\n');
-  var headers = lines[0].split(',').map(function(h) { return h.replace(/"/g,'').trim(); });
-  return lines.slice(1).map(function(line) {
-    var vals = line.split(',').map(function(v) { return v.replace(/"/g,'').trim(); });
-    var obj = {};
-    headers.forEach(function(h,i) { obj[h] = vals[i] || ''; });
-    return obj;
-  });
-}
-
-function loadDemoData() {
-  var t = today();
-  var tom = new Date(); tom.setDate(tom.getDate()+1); var tStr = tom.toISOString().split('T')[0];
-  var yest = new Date(); yest.setDate(yest.getDate()-1); var yStr = yest.toISOString().split('T')[0];
-  allRows = [
-    {'Guest Name':'Sophie Martin','Guest Email':'sophie@test.zora','Check-in Date':t,'Check-out Date':tStr,'Room Type':'Deluxe Room','Upsell Sent':'YES','Special Request':'Baby cot needed','Special Request Status':'pending'},
-    {'Guest Name':'Marco Rossi','Guest Email':'marco@test.zora','Check-in Date':t,'Check-out Date':tStr,'Room Type':'Junior Suite','Upsell Sent':'YES','Special Request':'','Special Request Status':''},
-    {'Guest Name':'Emma Schmidt','Guest Email':'emma@test.zora','Check-in Date':yStr,'Check-out Date':t,'Room Type':'Deluxe Room','Upsell Sent':'YES','Special Request':'','Special Request Status':''}
-  ];
-  renderAll();
-}
-
-function renderAll() {
-  var t = today();
-  var arrivals   = allRows.filter(function(r) { return normalizeDate(r['Check-in Date']) === t; });
-  var departures = allRows.filter(function(r) { return normalizeDate(r['Check-out Date']) === t; });
-  var pending    = allRows.filter(function(r) { return r['Special Request'] && r['Special Request Status'] === 'pending'; });
-  var withReq    = allRows.filter(function(r) { return r['Special Request']; });
-
-  document.getElementById('kpi-checkins').textContent  = arrivals.length;
-  document.getElementById('kpi-checkouts').textContent = departures.length;
-  document.getElementById('kpi-requests').textContent  = pending.length;
-  document.getElementById('kpi-emails').textContent    = allRows.length * 2;
-
-  document.getElementById('count-arrivals').textContent = arrivals.length + ' guest' + (arrivals.length !== 1 ? 's' : '');
-  document.getElementById('table-arrivals').innerHTML = arrivals.length === 0
-    ? '<tr><td colspan="5" class="empty-state">No arrivals today</td></tr>'
-    : arrivals.map(function(r) {
-        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong><br><span style="font-size:11px;color:var(--gray)">'+r['Guest Email']+'</span></td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td>'+formatDate(normalizeDate(r['Check-out Date']))+'</td><td style="font-size:12px;color:'+(r['Special Request']?'var(--gold)':'var(--gray)')+'">'+( r['Special Request'] || '—')+'</td><td><span class="badge badge-checkin">Arriving</span></td></tr>';
-      }).join('');
-
-  document.getElementById('count-departures').textContent = departures.length + ' guest' + (departures.length !== 1 ? 's' : '');
-  document.getElementById('table-departures').innerHTML = departures.length === 0
-    ? '<tr><td colspan="4" class="empty-state">No departures today</td></tr>'
-    : departures.map(function(r) {
-        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong><br><span style="font-size:11px;color:var(--gray)">'+r['Guest Email']+'</span></td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td>'+formatDate(normalizeDate(r['Check-in Date']))+'</td><td><span class="badge '+(r['Upsell Sent']==='YES'?'badge-done':'badge-pending')+'">'+(r['Upsell Sent']==='YES'?'Sent ✓':'Pending')+'</span></td></tr>';
-      }).join('');
-
-  document.getElementById('count-all-guests').textContent = allRows.length + ' guests';
-  document.getElementById('table-all-guests').innerHTML = allRows.map(function(r) {
-    return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong></td><td style="font-size:12px;color:var(--gray)">'+r['Guest Email']+'</td><td>'+formatDate(normalizeDate(r['Check-in Date']))+'</td><td>'+formatDate(normalizeDate(r['Check-out Date']))+'</td><td><span class="badge '+(r['Room Type'].includes('Junior')?'badge-junior':'badge-deluxe')+'">'+r['Room Type']+'</span></td><td style="font-size:12px;color:'+(r['Special Request']?'var(--gold)':'var(--gray)')+'">'+( r['Special Request'] || '—')+'</td></tr>';
-  }).join('');
-
-  document.getElementById('count-all-requests').textContent = withReq.length + ' total · ' + pending.length + ' pending';
-  document.getElementById('table-all-requests').innerHTML = withReq.length === 0
-    ? '<tr><td colspan="4" class="empty-state">No special requests</td></tr>'
-    : withReq.map(function(r) {
-        return '<tr><td><strong style="color:#fff">'+r['Guest Name']+'</strong></td><td style="font-size:12px;color:var(--gold)">'+r['Special Request']+'</td><td>'+formatDate(normalizeDate(r['Check-in Date']))+'</td><td><span class="badge '+(r['Special Request Status']==='done'?'badge-done':'badge-pending')+'">'+(r['Special Request Status']||'pending')+'</span></td></tr>';
-      }).join('');
-
-  if (currentRole === 'director') renderStats();
-}
-
-function renderStats() {
-  var thisMonth = today().slice(0,7);
-  var monthly = allRows.filter(function(r) { return r['Check-in Date'] && normalizeDate(r['Check-in Date']).startsWith(thisMonth); });
-  var specialM = allRows.filter(function(r) { return r['Special Request'] && r['Check-in Date'] && normalizeDate(r['Check-in Date']).startsWith(thisMonth); });
-  var hoursSaved = Math.round(allRows.length * 2 * 0.1 * 10) / 10;
-  var revenue = (monthly.length || allRows.length) * 3 * 400;
-
-  document.getElementById('stat-reservations').textContent = monthly.length || allRows.length;
-  document.getElementById('stat-revenue').textContent = 'CHF ' + revenue.toLocaleString();
-  document.getElementById('stat-special').textContent = specialM.length || allRows.filter(function(r){return r['Special Request'];}).length;
-  document.getElementById('stat-hours').textContent = hoursSaved + 'h';
-
-  var months = [];
-  for (var i = 5; i >= 0; i--) {
-    var d = new Date(); d.setMonth(d.getMonth() - i);
-    var key = d.toISOString().slice(0,7);
-    var label = d.toLocaleDateString('en', {month:'short'});
-    var count = allRows.filter(function(r) { return r['Check-in Date'] && normalizeDate(r['Check-in Date']).startsWith(key); }).length;
-    months.push({label:label, count:count, current:i===0});
-  }
-  var maxCount = Math.max.apply(null, months.map(function(m){return m.count;}));
-  maxCount = maxCount || 1;
-  document.getElementById('monthly-chart').innerHTML = months.map(function(m) {
-    return '<div class="chart-bar-wrap"><div class="chart-bar '+(m.current?'current':'')+'" style="height:'+Math.max(8,Math.round(m.count/maxCount*70))+'px" title="'+m.count+' reservations"></div><div class="chart-label">'+m.label+'</div></div>';
-  }).join('');
-
-  var deluxe = allRows.filter(function(r){return r['Room Type']&&r['Room Type'].includes('Deluxe');}).length;
-  var junior = allRows.filter(function(r){return r['Room Type']&&r['Room Type'].includes('Junior');}).length;
-  var total = deluxe + junior || 1;
-  document.getElementById('room-stats').innerHTML =
-    '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>Deluxe Room</span><span>'+deluxe+' ('+Math.round(deluxe/total*100)+'%)</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+Math.round(deluxe/total*100)+'%"></div></div></div>'+
-    '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>Junior Suite</span><span>'+junior+' ('+Math.round(junior/total*100)+'%)</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+Math.round(junior/total*100)+'%;background:var(--blue)"></div></div></div>';
-
-  // Nationality detection from guest name
-  var natMap = {};
-  allRows.forEach(function(r) {
-    var name = (r['Guest Name'] || '').toLowerCase();
-    var nat = '🌍 Other';
-    if (/müller|zimmermann|hans|schmidt|fischer/.test(name)) nat = '🇩🇪 Germany';
-    else if (/dubois|lefevre|pierre|claire|martin/.test(name)) nat = '🇫🇷 France';
-    else if (/rossi|ferretti|marco|elena|olivia/.test(name)) nat = '🇮🇹 Italy';
-    else if (/nakamura|yuki|tanaka|mei|zhang/.test(name)) nat = '🇯🇵 Japan';
-    else if (/larsson|ingrid|eriksson/.test(name)) nat = '🇸🇪 Sweden';
-    else if (/oliveira|rafael|silva/.test(name)) nat = '🇵🇹 Portugal';
-    else if (/al-hassan|fatima|ahmed/.test(name)) nat = '🇦🇪 UAE';
-    else if (/chen|wang|li|liu/.test(name)) nat = '🇨🇳 China';
-    else if (/mendoza|carlos|garcia/.test(name)) nat = '🇪🇸 Spain';
-    else if (/kowalski|anna|nowak/.test(name)) nat = '🇵🇱 Poland';
-    else if (/o\'brien|james|wilson/.test(name)) nat = '🇬🇧 UK';
-    natMap[nat] = (natMap[nat] || 0) + 1;
-  });
-  var topNats = Object.entries(natMap).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
-  var maxNat = topNats.length ? topNats[0][1] : 1;
-  document.getElementById('nationality-stats').innerHTML = topNats.map(function(entry) {
-    return '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>'+entry[0]+'</span><span>'+entry[1]+' guests</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+Math.round(entry[1]/maxNat*100)+'%"></div></div></div>';
-  }).join('');
-
-  var upsellSent = allRows.filter(function(r){return r['Upsell Sent']==='YES';}).length;
-  var upsellPct = allRows.length ? Math.round(upsellSent/allRows.length*100) : 0;
-  var reqDone = allRows.filter(function(r){return r['Special Request Status']==='done';}).length;
-  var reqTotal = allRows.filter(function(r){return r['Special Request'];}).length;
-  var reqPct = reqTotal ? Math.round(reqDone/reqTotal*100) : 100;
-  document.getElementById('automation-stats').innerHTML =
-    '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>Upsell emails sent</span><span>'+upsellSent+'/'+allRows.length+'</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+upsellPct+'%"></div></div></div>'+
-    '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>Requests resolved</span><span>'+reqDone+'/'+reqTotal+'</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:'+reqPct+'%"></div></div></div>'+
-    '<div class="stat-bar-wrap"><div class="stat-bar-label"><span>Email automation rate</span><span>100%</span></div><div class="stat-bar-track"><div class="stat-bar-fill" style="width:100%"></div></div></div>';
-
-  var recent = allRows.slice(-3).reverse();
-  document.getElementById('activity-feed').innerHTML = recent.map(function(r) {
-    return '<div class="activity-item"><div class="activity-dot" style="background:var(--green)"></div><div class="activity-text">Welcome email sent to <strong style="color:#fff">'+r['Guest Name']+'</strong></div><div class="activity-time">Recent</div></div>';
-  }).join('') +
-  '<div class="activity-item"><div class="activity-dot" style="background:var(--gold)"></div><div class="activity-text">Special requests detected and logged automatically</div><div class="activity-time">Today</div></div>'+
-  '<div class="activity-item"><div class="activity-dot" style="background:var(--blue)"></div><div class="activity-text">Upsell emails sent automatically to upcoming guests</div><div class="activity-time">Today</div></div>';
-}
-
-document.getElementById('login-pass').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') doLogin();
-});
+document.addEventListener('keypress', function(e){ if(e.key==='Enter') doLogin(); });
 </script>
 </body>
 </html>
