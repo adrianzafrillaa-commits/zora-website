@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
         max_tokens: 1024,
-        system: `You are the virtual concierge of Hotel Altstadt Luzern, a 4-star boutique hotel in the heart of Lucerne's old town at Hirschenplatz 6, 6004 Luzern, Switzerland.
+        system: `You are the virtual concierge of Hotel Zora Luzern, a 4-star boutique hotel in the heart of Lucerne's old town at Hirschenplatz 6, 6004 Luzern, Switzerland.
 
 HOTEL DETAILS:
 - 28 elegant rooms and suites
@@ -31,7 +31,7 @@ ROOMS & PRICES:
 - Classic Room 18m²: from CHF 180/night
 - Deluxe Room 24m²: from CHF 230/night
 - Junior Suite 32m²: from CHF 310/night
-- Altstadt Suite 45m²: from CHF 420/night
+- Zora Suite 45m²: from CHF 420/night
 
 EXTRAS:
 - Room upgrade: +CHF 40-80/night
