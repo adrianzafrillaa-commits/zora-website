@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGB — ZORA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="scrolled" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" style="color:var(--text-primary);">ZORA</a>
+    <div style="flex:1;"></div>
+    <a href="index.html" class="btn btn-secondary-light btn-sm">← zorai.ch</a>
+  </div>
+</nav>
+
+<!-- LEGAL HEADER -->
+<header class="legal-header">
+  <div class="legal-header-inner">
+    <span class="eyebrow eyebrow-dark">Rechtliches</span>
+    <h1 style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;">Allgemeine Geschäftsbedingungen</h1>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="legal-content">
+  <div class="legal-placeholder">
+    <h3>AGB in Erarbeitung</h3>
+    <p>Die Allgemeinen Geschäftsbedingungen von ZORA werden derzeit durch einen Schweizer Rechtsberater erarbeitet und in Kürze veröffentlicht.</p>
+    <p style="margin-top:8px;">Bei Fragen wenden Sie sich bitte an <a href="mailto:info@zorai.ch" style="color:var(--primary);">info@zorai.ch</a>.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-bottom" style="border-top:1px solid var(--border-dark);padding-top:32px;">
+    <p class="footer-copyright">© 2026 ZORA — Adrián Zafrilla Ortiz · Kriens, Schweiz</p>
+    <div style="display:flex;gap:16px;">
+      <a href="impressum.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Impressum</a>
+      <a href="privacy.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Datenschutz</a>
+      <a href="agb.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">AGB</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+</script>
+</body>
+</html>
