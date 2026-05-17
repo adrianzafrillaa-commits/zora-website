@@ -14,10 +14,10 @@ ZORA es una plataforma de inteligencia hotelera impulsada por IA que automatiza 
 
 Ser el sistema de gestión hotelera inteligente de referencia para hoteles suizos de 3-5 estrellas, comenzando por Luzern. Diferenciadores clave: automatización del cumplimiento normativo suizo (Kurtaxe, HESTA, Lucerne Guest Card), soporte multilingüe nativo (DE/EN/FR/IT), e implementación en 48 horas sin integración PMS requerida.
 
-### Estado actual (Abril 2026)
+### Estado actual (Mayo 2026)
 
-- Web pública: zorai.ch (EN/DE/FR/IT, negro/dorado)
-- Dashboard: zorai.ch/dashboard.html (director + recepción)
+- Web pública: zorai.ch (EN/DE/FR/IT, negro/dorado) — refactor visual en curso
+- Dashboard: app Next.js separada en Railway (no forma parte de este repo)
 - 6 escenarios Make.com operativos
 - Google Sheets como base de datos provisional
 - Primera visita comercial programada: Bellpark Hostel Kriens → Hotel Alpha Luzern
@@ -26,12 +26,16 @@ Ser el sistema de gestión hotelera inteligente de referencia para hoteles suizo
 
 ## Stack Técnico
 
-### Frontend
-- HTML/CSS/JS puro — sin frameworks
-- Diseño: negro `#0a0a0a`, dorado `#c9a96e`, tipografía DM Sans
+### Frontend (web pública)
+- HTML/CSS/JS puro — sin frameworks (refactor a React/Tailwind en curso, ver FRONTEND.md)
+- Diseño: negro `#0a0a0a`, dorado `#c9a96e`, tipografía DM Sans → migrando a Inter/Playfair/JetBrains Mono
 - Multiidioma via objeto JS `translations` (EN/DE/FR/IT)
-- Archivos: `index.html`, `dashboard.html`, `impressum.html`, `privacy.html`
+- Archivos en repo: `index.html`, `impressum.html`, `privacy.html`
 - Hosting: GitHub Pages (zorai.github.io → zorai.ch via CNAME)
+
+### Dashboard (app separada)
+- Next.js — repo y despliegue independiente en Railway
+- No vive en este repo — no editar aquí
 
 ### Automatización
 - **Make.com** — 6 escenarios activos:
@@ -201,8 +205,8 @@ TWILIO_SANDBOX_NUMBER=<your-twilio-number>
 TWILIO_SANDBOX_CODE=<your-sandbox-code>
 MAKE_WHATSAPP_WEBHOOK=<your-make-webhook-url>
 
-# Dashboard
-DASHBOARD_URL=https://zorai.ch/dashboard.html
+# Dashboard (Next.js en Railway — repo separado)
+DASHBOARD_URL=<railway-url-del-dashboard>
 DIRECTOR_EMAIL=director@zorai.ch
 DIRECTOR_PASS=<your-director-password>
 RECEPTION_EMAIL=recepcion@zorai.ch
@@ -214,43 +218,19 @@ RECEPTION_PASS=<your-reception-password>
 ## Estructura de Ficheros del Proyecto
 
 ```
-zorai/
-├── CLAUDE.md                    # Este archivo — contexto maestro del agente
-├── .env                         # Credenciales (nunca en git)
-├── .env.example                 # Plantilla sin valores reales
-├── .gitignore
+zora-website/                    # Este repo — web pública zorai.ch
+├── CLAUDE.md                    # Contexto maestro del agente
+├── FRONTEND.md                  # Briefing diseño para refactor visual
+├── package.json                 # { "type": "module" }
 │
-├── web/                         # Frontend zorai.ch
-│   ├── index.html               # Web principal (EN/DE/FR/IT)
-│   ├── dashboard.html           # Dashboard director + recepción
-│   ├── impressum.html           # Impressum DE/EN
-│   └── privacy.html             # Privacy Policy DE/EN
+├── index.html                   # Web principal (EN/DE/FR/IT)
+├── impressum.html               # Impressum DE/EN
+├── privacy.html                 # Privacy Policy DE/EN
 │
-├── make/                        # Documentación escenarios Make.com
-│   ├── scenario_1_bienvenida.md
-│   ├── scenario_2_upselling.md
-│   ├── scenario_3_faq.md
-│   ├── scenario_4_review.md
-│   ├── scenario_5_whatsapp.md
-│   └── scenario_6_compliance.md
-│
-├── scripts/                     # Scripts Python de utilidad
-│   ├── generate_kurtaxe.py      # Genera Excel Kurtaxe mensual
-│   ├── generate_hesta.py        # Genera informe HESTA mensual
-│   └── sync_sheets.py           # Sincronización Google Sheets
-│
-├── assets/                      # Recursos estáticos
-│   ├── emails/                  # Templates HTML de emails
-│   │   ├── welcome.html
-│   │   ├── upselling.html
-│   │   └── review.html
-│   └── demo/                    # Datos de demo para pitches
-│       └── demo_data_april.csv
-│
-└── docs/                        # Documentación comercial
-    ├── pitch_guide_v2.pdf
-    └── cold_email_templates.md
+└── (api/ eliminada)             # Chatbot legacy Vercel — el futuro chatbot llamará al backend ZORA v2 en Railway
 ```
+
+> El dashboard (Next.js) y los escenarios Make.com viven fuera de este repo.
 
 ---
 
@@ -295,7 +275,6 @@ zorai/
 1. Lee este `CLAUDE.md` completo si es la primera sesión
 2. Verifica qué archivos existen en el proyecto
 3. Si modificas web, comprueba que el multiidioma sigue intacto
-4. Si modificas Make.com docs, actualiza el escenario correspondiente en `make/`
 
 ### Al crear o modificar código
 1. Sin credenciales hardcodeadas — siempre `.env`
@@ -360,4 +339,4 @@ ZORA no es un chatbot. Es infraestructura invisible que hace que un hotel de 24 
 
 ---
 
-*Última actualización: Abril 2026 — Adrián Zafrilla Ortiz · info@zorai.ch · zorai.ch*
+*Última actualización: Mayo 2026 — Adrián Zafrilla Ortiz · info@zorai.ch · zorai.ch*
