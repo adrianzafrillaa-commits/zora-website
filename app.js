@@ -792,7 +792,7 @@ function initCookieBanner() {
 /* CHATBOT DEMO                                                 */
 /* ============================================================ */
 var chatHistory = [];
-var PROXY_URL = 'https://script.google.com/macros/s/AKfycby2FkgFTeKrMzak1gxIyAaZSDeYJapxJjn0mdfYpYb-1Q-eFB3YeF_C4xPIuvGO4bmL/exec';
+var API_URL = 'https://zora-backend-production.up.railway.app/v1/chat';
 
 function addMessage(text, who) {
   var messages = document.getElementById('messages');
@@ -858,15 +858,23 @@ function sendMessage() {
   setLoading(true);
   showTyping();
 
-  fetch(PROXY_URL, {
+  /* el backend limita history a 10 turnos como máximo */
+  fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages: chatHistory })
+    body: JSON.stringify({
+      mode: 'concierge',
+      message: text,
+      history: chatHistory.slice(0, -1).slice(-10)
+    })
   })
-  .then(function(r) { return r.json(); })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
   .then(function(data) {
     hideTyping();
-    var reply = data.reply || data.content || (data.candidates && data.candidates[0] && data.candidates[0].content);
+    var reply = data.reply;
     if (!reply) throw new Error('no reply');
     addMessage(reply, 'bot');
     chatHistory.push({ role: 'assistant', content: reply });
