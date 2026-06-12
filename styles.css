@@ -951,6 +951,145 @@ h1, h2, h3, h4 { line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
 #send-btn svg { width: 15px; height: 15px; fill: white; }
 
 /* ============================================================ */
+/* ZORA CHAT WIDGET (floating)                                  */
+/* ============================================================ */
+#zora-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+#zw-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-elevated);
+  transition: background var(--transition-fast);
+}
+#zw-toggle:hover { background: var(--primary-hover); }
+#zw-toggle:active { background: var(--primary-active); }
+#zw-toggle svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+#zw-panel {
+  width: 360px;
+  height: 480px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#zw-panel[hidden] { display: none; }
+#zw-header {
+  background: var(--bg-dark);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+#zw-logo {
+  width: 34px;
+  height: 34px;
+  background: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+#zw-header-info { flex: 1; }
+#zw-header-info h3 { font-size: 13px; font-weight: 600; color: #fff; }
+#zw-header-info p { font-size: 11px; color: var(--text-on-dark-secondary); margin-top: 1px; }
+#zw-close {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+#zw-close:hover { background: rgba(255,255,255,0.08); }
+#zw-close svg { width: 16px; height: 16px; fill: none; stroke: var(--text-on-dark-secondary); stroke-width: 2; stroke-linecap: round; }
+#zw-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-subtle);
+}
+#zw-input-area {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  gap: 8px;
+  background: #fff;
+  flex-shrink: 0;
+}
+#zw-input {
+  flex: 1;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+  transition: border-color var(--transition-fast);
+}
+#zw-input:focus { border-color: var(--primary); }
+#zw-input::placeholder { color: var(--text-muted); }
+#zw-send {
+  width: 36px;
+  height: 36px;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+}
+#zw-send:hover { background: var(--primary-hover); }
+#zw-send:disabled { background: var(--border-light); cursor: not-allowed; }
+#zw-send svg { width: 15px; height: 15px; fill: white; }
+
+@media (max-width: 480px) {
+  #zora-widget { bottom: 16px; right: 16px; }
+  #zw-panel {
+    width: calc(100vw - 32px);
+    height: min(480px, calc(100dvh - 140px));
+  }
+  #zw-toggle span { display: none; }
+  #zw-toggle { padding: 14px; }
+}
+
+/* ============================================================ */
 /* PRICING                                                      */
 /* ============================================================ */
 #pricing { background: var(--bg-light); }

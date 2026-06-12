@@ -693,6 +693,35 @@
   </div>
 </div>
 
+<!-- ============================================================ -->
+<!-- ZORA CHAT WIDGET (floating, mode: zora)                      -->
+<!-- ============================================================ -->
+<div id="zora-widget">
+  <div id="zw-panel" role="dialog" aria-label="ZORA product assistant" hidden>
+    <div id="zw-header">
+      <div id="zw-logo" aria-hidden="true">Z</div>
+      <div id="zw-header-info">
+        <h3 data-i18n="widget.title">ZORA Assistent</h3>
+        <p data-i18n="widget.sub">Produktfragen · Antwort in Sekunden</p>
+      </div>
+      <button id="zw-close" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="zw-messages" aria-live="polite" aria-label="Chat messages"></div>
+    <div id="zw-input-area">
+      <input type="text" id="zw-input" data-i18n-placeholder="widget.placeholder" placeholder="Ihre Frage zu ZORA..." aria-label="Chat input" />
+      <button id="zw-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+  <button id="zw-toggle" aria-expanded="false" aria-controls="zw-panel">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span data-i18n="widget.label">Fragen zu ZORA?</span>
+  </button>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>

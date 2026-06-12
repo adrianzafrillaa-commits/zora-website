@@ -137,6 +137,13 @@ var translations = {
     "demo.placeholder": "Stellen Sie eine Frage...",
     "demo.error": "Entschuldigung, es gab ein technisches Problem. Bitte versuchen Sie es erneut.",
 
+    /* WIDGET (floating ZORA chat) */
+    "widget.label": "Fragen zu ZORA?",
+    "widget.title": "ZORA Assistent",
+    "widget.sub": "Produktfragen · Antwort in Sekunden",
+    "widget.welcome": "Guten Tag. Ich bin der ZORA-Assistent. Fragen Sie mich, was ZORA kann, was es kostet oder wie die Einrichtung funktioniert.",
+    "widget.placeholder": "Ihre Frage zu ZORA...",
+
     /* PRICING */
     "pricing.eyebrow": "Preise",
     "pricing.h2": "Einfache, transparente Preise",
@@ -348,6 +355,12 @@ var translations = {
     "demo.placeholder": "Ask anything...",
     "demo.error": "I apologize, there seems to be a technical issue. Please try again.",
 
+    "widget.label": "Questions about ZORA?",
+    "widget.title": "ZORA Assistant",
+    "widget.sub": "Product questions · Answered in seconds",
+    "widget.welcome": "Hello. I am the ZORA assistant. Ask me what ZORA does, what it costs, or how setup works.",
+    "widget.placeholder": "Your question about ZORA...",
+
     "pricing.eyebrow": "Pricing",
     "pricing.h2": "Simple, transparent pricing",
     "pricing.sub": "No contracts. Cancel anytime. Free setup this month.",
@@ -508,6 +521,11 @@ var translations = {
     "demo.q3": "Parking disponible?", "demo.q4": "Réserver une chambre",
     "demo.placeholder": "Posez une question...",
     "demo.error": "Désolé, un problème technique s'est produit. Veuillez réessayer.",
+    "widget.label": "Des questions sur ZORA?",
+    "widget.title": "Assistant ZORA",
+    "widget.sub": "Questions produit · Réponse en quelques secondes",
+    "widget.welcome": "Bonjour. Je suis l'assistant ZORA. Demandez-moi ce que fait ZORA, ses tarifs ou comment fonctionne l'installation.",
+    "widget.placeholder": "Votre question sur ZORA...",
     "pricing.eyebrow": "Tarifs", "pricing.h2": "Des tarifs simples et transparents",
     "pricing.sub": "Sans contrat. Résiliation mensuelle. Installation gratuite ce mois-ci.",
     "plan.core.name": "Core", "plan.core.setup": "CHF 500 frais d'installation",
@@ -619,6 +637,11 @@ var translations = {
     "demo.q3": "Parcheggio disponibile?", "demo.q4": "Prenotare una camera",
     "demo.placeholder": "Fate una domanda...",
     "demo.error": "Mi scuso, si è verificato un problema tecnico. Riprovate.",
+    "widget.label": "Domande su ZORA?",
+    "widget.title": "Assistente ZORA",
+    "widget.sub": "Domande sul prodotto · Risposta in pochi secondi",
+    "widget.welcome": "Buongiorno. Sono l'assistente ZORA. Chiedetemi cosa fa ZORA, quanto costa o come funziona l'installazione.",
+    "widget.placeholder": "La vostra domanda su ZORA...",
     "pricing.eyebrow": "Prezzi", "pricing.h2": "Prezzi semplici e trasparenti",
     "pricing.sub": "Nessun contratto. Cancellazione mensile. Installazione gratuita questo mese.",
     "plan.core.name": "Core", "plan.core.setup": "CHF 500 spese di installazione",
@@ -689,6 +712,11 @@ function applyTranslations() {
   var chatFirstMsg = document.querySelector('#messages .msg.bot .bubble');
   if (chatFirstMsg && chatFirstMsg.dataset.welcome) {
     chatFirstMsg.textContent = t('demo.chat.welcome');
+  }
+  /* update widget welcome if widget has been opened */
+  var zwFirstMsg = document.querySelector('#zw-messages .msg.bot .bubble');
+  if (zwFirstMsg && zwFirstMsg.dataset.welcome) {
+    zwFirstMsg.textContent = t('widget.welcome');
   }
 }
 
@@ -905,6 +933,133 @@ function initChat() {
 }
 
 /* ============================================================ */
+/* ZORA WIDGET — floating product chat (mode: zora)             */
+/* ============================================================ */
+var widgetHistory = [];
+
+function zwAddMessage(text, who) {
+  var messages = document.getElementById('zw-messages');
+  if (!messages) return;
+  var div = document.createElement('div');
+  div.className = 'msg ' + who;
+  var bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = text;
+  if (who === 'bot' && widgetHistory.length === 0) {
+    bubble.dataset.welcome = '1';
+  }
+  var avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = who === 'bot' ? 'Z' : 'You';
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function zwShowTyping() {
+  var messages = document.getElementById('zw-messages');
+  if (!messages) return;
+  var div = document.createElement('div');
+  div.className = 'msg bot';
+  div.id = 'zw-typing-indicator';
+  var avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = 'Z';
+  var bubble = document.createElement('div');
+  bubble.className = 'typing-bubble';
+  bubble.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function zwHideTyping() {
+  var el = document.getElementById('zw-typing-indicator');
+  if (el) el.remove();
+}
+
+function zwSetLoading(on) {
+  var btn = document.getElementById('zw-send');
+  var input = document.getElementById('zw-input');
+  if (btn) btn.disabled = on;
+  if (input) input.disabled = on;
+}
+
+function zwSendMessage() {
+  var input = document.getElementById('zw-input');
+  if (!input) return;
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  zwAddMessage(text, 'user');
+  widgetHistory.push({ role: 'user', content: text });
+  zwSetLoading(true);
+  zwShowTyping();
+
+  /* el backend limita history a 10 turnos como máximo */
+  fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      mode: 'zora',
+      message: text,
+      history: widgetHistory.slice(0, -1).slice(-10)
+    })
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(function(data) {
+    zwHideTyping();
+    var reply = data.reply;
+    if (!reply) throw new Error('no reply');
+    zwAddMessage(reply, 'bot');
+    widgetHistory.push({ role: 'assistant', content: reply });
+    zwSetLoading(false);
+    if (input) input.focus();
+  })
+  .catch(function() {
+    zwHideTyping();
+    zwAddMessage(t('demo.error'), 'bot');
+    widgetHistory.pop();
+    zwSetLoading(false);
+  });
+}
+
+function initWidget() {
+  var toggle = document.getElementById('zw-toggle');
+  var panel = document.getElementById('zw-panel');
+  var closeBtn = document.getElementById('zw-close');
+  var input = document.getElementById('zw-input');
+  var sendBtn = document.getElementById('zw-send');
+  if (!toggle || !panel) return;
+
+  function setOpen(open) {
+    panel.hidden = !open;
+    toggle.setAttribute('aria-expanded', open);
+    if (open) {
+      /* welcome message only on first open */
+      if (!document.querySelector('#zw-messages .msg')) {
+        zwAddMessage(t('widget.welcome'), 'bot');
+      }
+      if (input) input.focus();
+    }
+  }
+
+  toggle.addEventListener('click', function() { setOpen(panel.hidden); });
+  if (closeBtn) closeBtn.addEventListener('click', function() { setOpen(false); });
+  if (sendBtn) sendBtn.addEventListener('click', zwSendMessage);
+  if (input) {
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); zwSendMessage(); }
+    });
+  }
+}
+
+/* ============================================================ */
 /* INIT                                                         */
 /* ============================================================ */
 document.addEventListener('DOMContentLoaded', function() {
@@ -921,4 +1076,5 @@ document.addEventListener('DOMContentLoaded', function() {
   initFaq();
   initCookieBanner();
   initChat();
+  initWidget();
 });
