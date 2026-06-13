@@ -306,6 +306,24 @@ h1, h2, h3, h4 { line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
 .mobile-menu-divider { height: 1px; background: var(--border-light); margin: 8px 32px; }
 .mobile-menu-cta { padding: 12px 32px; }
 
+/* Language switcher inside mobile menu (light background) */
+.mobile-lang-switcher { display: none; gap: 8px; padding: 8px 32px; }
+.mobile-lang-switcher .lang-btn {
+  flex: 1;
+  min-height: 44px;
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+.mobile-lang-switcher .lang-btn:hover { color: var(--text-primary); background: var(--bg-light-alt); }
+.mobile-lang-switcher .lang-btn.active {
+  color: var(--text-primary);
+  background: var(--bg-light-alt);
+  border-color: var(--primary);
+}
+
 /* ============================================================ */
 /* HERO                                                         */
 /* ============================================================ */
@@ -1527,7 +1545,9 @@ h1, h2, h3, h4 { line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
   #navbar .btn-primary { display: none; }
   .nav-hamburger { display: flex; }
   .nav-inner { gap: 16px; }
-  .lang-switcher { display: none; }
+  .nav-right .lang-switcher,
+  .footer-bottom .lang-switcher { display: none; }
+  .mobile-lang-switcher { display: flex; }
 
   .hero-inner { padding: 0 20px; }
   #hero { padding-top: calc(var(--nav-height) + 48px); padding-bottom: 64px; }
