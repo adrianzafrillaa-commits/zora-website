@@ -340,6 +340,16 @@ h1, h2, h3, h4 { line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
   background: #22C55E;
   flex-shrink: 0;
 }
+.hero-flag {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.hero-flag svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
 .hero-h1 {
   font-size: clamp(40px, 6vw, 64px);
   font-weight: 600;
