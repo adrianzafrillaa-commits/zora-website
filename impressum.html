@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impressum — ZORA</title>
+  <title>Aviso legal — ZORA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,8 @@
     <a href="index.html" class="nav-logo" style="color:var(--text-primary);">ZORA</a>
     <div style="flex:1;"></div>
     <div class="legal-lang-switch nav-right">
-      <button class="legal-lang-btn active" onclick="setLang('de', this)" aria-label="Deutsch">DE</button>
+      <button class="legal-lang-btn active" onclick="setLang('es', this)" aria-label="Español">ES</button>
+      <button class="legal-lang-btn" onclick="setLang('de', this)" aria-label="Deutsch">DE</button>
       <button class="legal-lang-btn" onclick="setLang('en', this)" aria-label="English">EN</button>
     </div>
     <a href="index.html" class="btn btn-secondary-light btn-sm" style="margin-left:8px;">← zorai.ch</a>
@@ -27,9 +28,11 @@
 <!-- LEGAL HEADER -->
 <header class="legal-header">
   <div class="legal-header-inner">
-    <span class="eyebrow eyebrow-dark" id="label-de">Rechtliches</span>
+    <span class="eyebrow eyebrow-dark" id="label-es">Legal</span>
+    <span class="eyebrow eyebrow-dark" id="label-de" style="display:none;">Rechtliches</span>
     <span class="eyebrow eyebrow-dark" id="label-en" style="display:none;">Legal</span>
-    <h1 id="title-de" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;">Impressum</h1>
+    <h1 id="title-es" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;">Aviso legal</h1>
+    <h1 id="title-de" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;display:none;">Impressum</h1>
     <h1 id="title-en" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;display:none;">Impressum</h1>
   </div>
 </header>
@@ -37,8 +40,47 @@
 <!-- CONTENT -->
 <div class="legal-content">
 
+  <!-- SPANISH -->
+  <!-- NOTA REVISIÓN LEGAL: traducción fiel del original alemán (versión de referencia).
+       Puntos a validar con asesor legal: "Gerichtsstand" traducido como "fuero jurisdiccional",
+       y la equivalencia de "Haftungsausschluss" como "Exención de responsabilidad". -->
+  <div class="legal-section active" id="lang-es">
+    <h2>Datos de la empresa</h2>
+    <p>ZORA</p>
+    <p>Adrián Zafrilla Ortiz</p>
+    <p>Amlehnstrasse 50</p>
+    <p>6010 Kriens, Suiza</p>
+
+    <hr class="legal-divider">
+
+    <h2>Contacto</h2>
+    <p>Correo electrónico: <a href="mailto:info@zorai.ch">info@zorai.ch</a></p>
+    <p>Teléfono: <a href="tel:+41783153254">+41 78 315 32 54</a></p>
+    <p>Sitio web: <a href="https://zorai.ch">zorai.ch</a></p>
+
+    <hr class="legal-divider">
+
+    <h2>Exención de responsabilidad</h2>
+    <p>ZORA ofrece soluciones de concierge con IA para hoteles. Todo el contenido de este sitio web tiene fines exclusivamente informativos. Nos reservamos el derecho de modificar o descontinuar los servicios en cualquier momento.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Tecnología de IA</h2>
+    <p>Este sitio web y nuestros servicios utilizan tecnología de IA de Anthropic Claude. La demo del concierge con IA procesa las conversaciones en tiempo real. ZORA no almacena las conversaciones de forma permanente.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Legislación aplicable</h2>
+    <p>Este sitio web se rige por el derecho suizo. El fuero jurisdiccional es Lucerna, Suiza.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Protección de datos</h2>
+    <p>Encontrará la información sobre el tratamiento de datos personales en nuestra <a href="privacy.html">política de privacidad</a>.</p>
+  </div>
+
   <!-- GERMAN -->
-  <div class="legal-section active" id="lang-de">
+  <div class="legal-section" id="lang-de">
     <h2>Angaben zum Unternehmen</h2>
     <p>ZORA</p>
     <p>Adrián Zafrilla Ortiz</p>
@@ -114,11 +156,11 @@
 <!-- FOOTER -->
 <footer id="footer">
   <div class="footer-bottom" style="border-top:1px solid var(--border-dark);padding-top:32px;">
-    <p class="footer-copyright">© 2026 ZORA — Adrián Zafrilla Ortiz · Kriens, Schweiz</p>
+    <p class="footer-copyright">© 2026 ZORA — Adrián Zafrilla Ortiz · Kriens, Suiza</p>
     <div style="display:flex;gap:16px;">
-      <a href="impressum.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Impressum</a>
-      <a href="privacy.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Datenschutz</a>
-      <a href="agb.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">AGB</a>
+      <a href="impressum.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Aviso legal</a>
+      <a href="privacy.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Privacidad</a>
+      <a href="agb.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Términos</a>
     </div>
   </div>
 </footer>
@@ -132,11 +174,10 @@ function setLang(lang, btn) {
   document.documentElement.lang = lang;
   /* toggle titles / labels */
   ['label', 'title'].forEach(function(p) {
-    var de = document.getElementById(p + '-de');
-    var en = document.getElementById(p + '-en');
-    if (!de || !en) return;
-    de.style.display = lang === 'de' ? '' : 'none';
-    en.style.display = lang === 'en' ? '' : 'none';
+    ['es', 'de', 'en'].forEach(function(l) {
+      var el = document.getElementById(p + '-' + l);
+      if (el) el.style.display = lang === l ? '' : 'none';
+    });
   });
 }
 /* Navbar scroll behavior */

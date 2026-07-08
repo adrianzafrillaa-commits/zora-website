@@ -334,10 +334,9 @@ h1, h2, h3, h4 { line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
   min-height: 640px;
 }
 .hero-inner {
-  max-width: 1200px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 32px;
-  max-width: 760px;
   text-align: center;
 }
 .hero-eyebrow {
@@ -358,23 +357,14 @@ h1, h2, h3, h4 { line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; }
   background: #22C55E;
   flex-shrink: 0;
 }
-.hero-flag {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-.hero-flag svg {
-  display: block;
-  width: 15px;
-  height: 15px;
-}
 .hero-h1 {
-  font-size: clamp(40px, 6vw, 64px);
+  font-size: clamp(40px, 4.8vw, 54px);
   font-weight: 600;
   color: var(--text-on-dark-primary);
   line-height: 1.08;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
+  text-wrap: balance;
 }
 .hero-h1 .break { display: block; }
 .hero-sub {

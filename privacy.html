@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datenschutzerklärung — ZORA</title>
+  <title>Política de privacidad — ZORA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,8 @@
     <a href="index.html" class="nav-logo" style="color:var(--text-primary);">ZORA</a>
     <div style="flex:1;"></div>
     <div class="nav-right">
-      <button class="legal-lang-btn active" onclick="setLang('de', this)" aria-label="Deutsch">DE</button>
+      <button class="legal-lang-btn active" onclick="setLang('es', this)" aria-label="Español">ES</button>
+      <button class="legal-lang-btn" onclick="setLang('de', this)" aria-label="Deutsch">DE</button>
       <button class="legal-lang-btn" onclick="setLang('en', this)" aria-label="English">EN</button>
       <a href="index.html" class="btn btn-secondary-light btn-sm" style="margin-left:8px;">← zorai.ch</a>
     </div>
@@ -27,8 +28,11 @@
 <!-- LEGAL HEADER -->
 <header class="legal-header">
   <div class="legal-header-inner">
-    <span class="eyebrow eyebrow-dark">Rechtliches</span>
-    <h1 id="page-title-de" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;">Datenschutzerklärung</h1>
+    <span class="eyebrow eyebrow-dark" id="label-es">Legal</span>
+    <span class="eyebrow eyebrow-dark" id="label-de" style="display:none;">Rechtliches</span>
+    <span class="eyebrow eyebrow-dark" id="label-en" style="display:none;">Legal</span>
+    <h1 id="page-title-es" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;">Política de privacidad</h1>
+    <h1 id="page-title-de" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;display:none;">Datenschutzerklärung</h1>
     <h1 id="page-title-en" style="color:var(--text-on-dark-primary);font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-0.02em;margin-top:12px;display:none;">Privacy Policy</h1>
   </div>
 </header>
@@ -36,8 +40,66 @@
 <!-- CONTENT -->
 <div class="legal-content">
 
+  <!-- SPANISH -->
+  <!-- NOTA REVISIÓN LEGAL: traducción fiel del original alemán (versión de referencia). Puntos a validar con asesor legal:
+       - "nDSG" se mantiene como referencia a la ley suiza de protección de datos (no se sustituyó por RGPD).
+       - "Standardvertragsklauseln" traducido como "cláusulas contractuales tipo" (término oficial UE).
+       - "Gerichtsstand" traducido como "fuero jurisdiccional". -->
+  <div class="legal-section active" id="lang-es">
+
+    <h2>Responsable del tratamiento</h2>
+    <p>Adrián Zafrilla Ortiz</p>
+    <p>Amlehnstrasse 50, 6010 Kriens, Suiza</p>
+    <p>Correo electrónico: <a href="mailto:info@zorai.ch">info@zorai.ch</a></p>
+    <p>Teléfono: <a href="tel:+41783153254">+41 78 315 32 54</a></p>
+
+    <hr class="legal-divider">
+
+    <h2>Qué datos recopilamos</h2>
+    <p>Recopilamos los datos que usted proporciona voluntariamente a través de nuestro formulario de contacto — incluidos su nombre, dirección de correo electrónico, nombre del hotel, número de teléfono y mensaje.</p>
+    <p>Cuando utiliza la demo del concierge con IA, sus mensajes se procesan en tiempo real a través de la API de Anthropic Claude. ZORA no almacena estas conversaciones de forma permanente.</p>
+    <p>En el marco de nuestros servicios de automatización hotelera, procesamos datos de huéspedes (nombre, correo electrónico, fechas de la estadía) únicamente para prestar los servicios acordados.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Cómo usamos sus datos</h2>
+    <p>Los datos del formulario de contacto se utilizan únicamente para responder a su consulta y proporcionarle información sobre los servicios de ZORA. No vendemos ni compartimos sus datos personales con terceros con fines de marketing.</p>
+    <p>Los datos de los huéspedes de los hoteles se utilizan exclusivamente para automatizar los servicios hoteleros acordados y no se comparten con terceros.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Servicios de terceros</h2>
+    <p>Este sitio web y nuestros servicios utilizan los siguientes proveedores externos, cada uno con sus propias políticas de privacidad:</p>
+    <p>— Anthropic Claude API (procesamiento de IA, EE. UU.)</p>
+    <p>— Make.com / Integromat (automatización, UE)</p>
+    <p>— Google Workspace (almacenamiento de datos, UE)</p>
+    <p>— Railway (hosting, EE. UU.)</p>
+    <p>Las transferencias de datos a EE. UU. se realizan sobre la base de garantías adecuadas (cláusulas contractuales tipo).</p>
+
+    <hr class="legal-divider">
+
+    <h2>Sus derechos</h2>
+    <p>Conforme a la ley suiza de protección de datos (nDSG), usted tiene derecho en todo momento a acceder a sus datos personales, rectificarlos o eliminarlos. Para ejercer estos derechos, escríbanos a <a href="mailto:info@zorai.ch">info@zorai.ch</a>.</p>
+
+    <hr class="legal-divider">
+
+    <h2 id="cookies-es">Cookies</h2>
+    <p>Este sitio web no utiliza cookies de seguimiento ni herramientas de análisis de terceros. Solo almacenamos datos técnicamente necesarios (por ejemplo, su consentimiento de cookies) en el almacenamiento local de su navegador (localStorage).</p>
+
+    <hr class="legal-divider">
+
+    <h2>Cambios en esta política</h2>
+    <p>Podemos actualizar esta política de privacidad ocasionalmente. La versión vigente estará siempre disponible en zorai.ch/privacy.html.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Legislación aplicable</h2>
+    <p>Esta política de privacidad se rige por el derecho suizo (nDSG). El fuero jurisdiccional es Lucerna, Suiza.</p>
+
+  </div>
+
   <!-- GERMAN -->
-  <div class="legal-section active" id="lang-de">
+  <div class="legal-section" id="lang-de">
 
     <h2>Verantwortliche Person</h2>
     <p>Adrián Zafrilla Ortiz</p>
@@ -149,11 +211,11 @@
 <!-- FOOTER -->
 <footer id="footer">
   <div class="footer-bottom" style="border-top:1px solid var(--border-dark);padding-top:32px;">
-    <p class="footer-copyright">© 2026 ZORA — Adrián Zafrilla Ortiz · Kriens, Schweiz</p>
+    <p class="footer-copyright">© 2026 ZORA — Adrián Zafrilla Ortiz · Kriens, Suiza</p>
     <div style="display:flex;gap:16px;">
-      <a href="impressum.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Impressum</a>
-      <a href="privacy.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Datenschutz</a>
-      <a href="agb.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">AGB</a>
+      <a href="impressum.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Aviso legal</a>
+      <a href="privacy.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Privacidad</a>
+      <a href="agb.html" style="font-size:13px;color:var(--text-on-dark-muted);text-decoration:none;">Términos</a>
     </div>
   </div>
 </footer>
@@ -165,8 +227,12 @@ function setLang(lang, btn) {
   document.querySelectorAll('.legal-lang-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
   document.documentElement.lang = lang;
-  document.getElementById('page-title-de').style.display = lang === 'de' ? '' : 'none';
-  document.getElementById('page-title-en').style.display = lang === 'en' ? '' : 'none';
+  ['es', 'de', 'en'].forEach(function(l) {
+    var title = document.getElementById('page-title-' + l);
+    if (title) title.style.display = lang === l ? '' : 'none';
+    var label = document.getElementById('label-' + l);
+    if (label) label.style.display = lang === l ? '' : 'none';
+  });
 }
 window.addEventListener('scroll', function() {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
